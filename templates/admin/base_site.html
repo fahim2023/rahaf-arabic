@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% load static site_tags %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:"Rahaf Malasy · Admin" }}{% endblock %}
+
+{# The admin always uses the site's light sand theme, so the dark-mode switch is turned off. #}
+{% block dark-mode-vars %}{% endblock %}
+
+{% block extrahead %}
+<link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<meta name="theme-color" content="#1F5C5A">
+{% endblock %}
+
+{% block extrastyle %}<link rel="stylesheet" href="{% static 'css/admin.css' %}">{% endblock %}
+
+{% block branding %}
+<a href="{% url 'admin:index' %}" class="rm-brand">
+  {% logo_mark 40 True %}
+  <span class="rm-brand-text">
+    <span class="rm-brand-name">{{ site_header|default:"Rahaf Malasy" }}</span>
+    <span class="rm-brand-sub">Site admin</span>
+  </span>
+</a>
+{% endblock %}
+
+{% block userlinks %}
+  <a href="{% url 'dashboard:questions' %}">Phone dashboard</a>
+  <a href="{% url 'core:home' %}" target="_blank" rel="noopener">View site ↗</a>
+  {% if user.has_usable_password %}<a href="{% url 'admin:password_change' %}">Change password</a>{% endif %}
+  <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+    {% csrf_token %}
+    <button type="submit">Log out</button>
+  </form>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

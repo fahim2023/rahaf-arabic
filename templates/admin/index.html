@@ -1,0 +1,82 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block content_title %}
+<div class="rm-hello">
+  <span class="rm-hello-ar" lang="ar">أهلاً وسهلاً</span>
+  <h1>Welcome back{% if user.first_name %}, {{ user.first_name }}{% endif %}</h1>
+  <p>Here's what needs your attention today.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  {% if stats %}
+  <div class="rm-stats">
+    <a class="rm-stat{% if stats.questions %} is-hot{% endif %}" href="{% url 'admin:qa_question_changelist' %}?status__in=new,draft">
+      <b>{{ stats.questions }}</b><span>question{{ stats.questions|pluralize }} to answer</span>
+    </a>
+    <a class="rm-stat{% if stats.bookings %} is-hot{% endif %}" href="{% url 'admin:bookings_trialrequest_changelist' %}?status__exact=new">
+      <b>{{ stats.bookings }}</b><span>new trial request{{ stats.bookings|pluralize }}</span>
+    </a>
+    <a class="rm-stat" href="{% url 'admin:portal_lesson_changelist' %}?when=today">
+      <b>{{ stats.lessons_today }}</b><span>lesson{{ stats.lessons_today|pluralize }} today</span>
+    </a>
+    <a class="rm-stat" href="{% url 'admin:portal_homework_changelist' %}?done__exact=0">
+      <b>{{ stats.homework }}</b><span>homework not done</span>
+    </a>
+  </div>
+
+  <div class="rm-quick">
+    <h2>Quick actions</h2>
+    <div class="rm-quick-grid">
+      <a href="{% url 'admin:portal_lesson_add' %}">＋ Schedule a lesson</a>
+      <a href="{% url 'admin:portal_homework_add' %}">＋ Set homework</a>
+      <a href="{% url 'admin:portal_sharedfile_add' %}">＋ Share a file</a>
+      <a href="{% url 'admin:accounts_invitecode_add' %}">＋ New invite code</a>
+      <a href="{% url 'admin:core_resource_add' %}">＋ Add a free resource</a>
+      <a href="{% url 'admin:core_sitesettings_changelist' %}">✎ Edit site details</a>
+    </div>
+  </div>
+
+  {% if upcoming_lessons %}
+  <div class="module rm-upcoming">
+    <h2>Next lessons</h2>
+    <table>
+      {% for lesson in upcoming_lessons %}
+      <tr>
+        <th scope="row"><a href="{% url 'admin:portal_lesson_change' lesson.pk %}">{{ lesson.starts_at|date:"D j M · H:i" }}</a></th>
+        <td>{{ lesson.student.get_full_name|default:lesson.student.email }}</td>
+        <td class="rm-quiet">{{ lesson.topic|default:"" }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+  {% endif %}
+
+  {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+  <div class="module" id="recent-actions-module">
+    <h2>Your recent changes</h2>
+    {% load log %}
+    {% get_admin_log 8 as admin_log for_user user %}
+    {% if not admin_log %}
+      <p class="rm-quiet" style="padding:12px 16px">Nothing yet.</p>
+    {% else %}
+      <ul class="actionlist">
+      {% for entry in admin_log %}
+        <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+          {% if entry.is_deletion or not entry.get_admin_url %}{{ entry.object_repr }}{% else %}<a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>{% endif %}
+          <br><span class="mini quiet">{{ entry.content_type.name|capfirst }} · {{ entry.action_time|timesince }} ago</span>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
