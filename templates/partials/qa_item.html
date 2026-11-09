@@ -1,0 +1,15 @@
+{% load i18n site_tags %}
+<article class="qa-item">
+  <div class="row between gap-10">
+    <span class="chip" style="font-size:13px">{{ q.get_topic_display }}</span>
+    <span class="small">{% if q.asker_label == "parent" %}{% trans "Asked by a parent" %}{% elif q.asker_label == "beginner" %}{% trans "Asked by a beginner student" %}{% elif q.asker_label == "intermediate" %}{% trans "Asked by an intermediate student" %}{% elif q.asker_label == "advanced" %}{% trans "Asked by an advanced student" %}{% else %}{% trans "Asked by a student" %}{% endif %}</span>
+  </div>
+  <h3>{{ q.display_question }}</h3>
+  <div class="qa-answer">
+    {% logo_mark 34 %}
+    <div class="stack gap-6" style="min-width:0">
+      <span style="font-size:14px;font-weight:700;color:var(--teal)">{% trans "Rahaf answered" %}</span>
+      <p>{{ q.display_answer }}</p>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load site_tags %}
+{% block title %}{% block dash_title %}Dashboard{% endblock %} · Rahaf{% endblock %}
+{% block head %}<meta name="robots" content="noindex">{% endblock %}
+{% block body %}
+<div class="dash" lang="en" dir="ltr">
+  {% block top %}{% endblock %}
+  {% include "partials/messages.html" %}
+  <main id="main" class="dash-body">{% block dash %}{% endblock %}</main>
+  <nav class="dash-nav" aria-label="Dashboard">
+    <a href="{% url 'dashboard:questions' %}"{% if nav == "questions" %} aria-current="page"{% endif %}>{% icon "chat" 22 %}Questions{% if new_count %}<span class="badge">{{ new_count }}</span>{% endif %}</a>
+    <a href="{% url 'dashboard:bookings' %}"{% if nav == "bookings" %} aria-current="page"{% endif %}>{% icon "calendar" 22 %}Bookings{% if new_bookings %}<span class="badge">{{ new_bookings }}</span>{% endif %}</a>
+    <a href="{% url 'dashboard:students' %}"{% if nav == "students" %} aria-current="page"{% endif %}>{% icon "users" 22 %}Students</a>
+    <a href="{% url 'admin:index' %}">{% icon "settings" 22 %}Site</a>
+  </nav>
+</div>
+{% endblock %}

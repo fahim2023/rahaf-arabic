@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load i18n site_tags %}
+{% block title %}{% trans "Privacy policy" %} · {% trans "Rahaf Malasy" %}{% endblock %}
+{% block content %}
+{% with email=site.contact_email|default:"[EMAIL]" %}
+<div class="container stack gap-28" style="padding-block:clamp(40px,6vw,72px) 80px">
+  <div class="stack gap-6" style="max-width:760px">
+    {% include "partials/eyebrow.html" with en="Privacy policy" ar="سياسة الخصوصية" %}
+    <h1 class="h2" style="font-size:clamp(34px,4.4vw,50px)">{% trans "Privacy policy" %}</h1>
+    {% if is_rtl %}
+    <p class="muted">آخر تحديث: [التاريخ]. توضّح هذه الصفحة المعلومات الشخصية التي أجمعها عند استخدامك لهذا الموقع أو عند أخذ الدروس معي، وكيف أحافظ عليها.</p>
+    {% else %}
+    <p class="muted">Last updated: [DATE]. This explains what personal information I collect when you use this website or take lessons with me, and how I look after it.</p>
+    {% endif %}
+  </div>
+
+  <div class="note-box" role="note">
+    {% icon "info" 22 %}
+    <p style="font-size:15px"><strong>Template:</strong> fill in every [bracket] to match what the site really does, then have it checked before going live. Remove this box when done (templates/core/privacy.html).</p>
+  </div>
+
+  <div class="row gap-40" style="align-items:flex-start">
+    {% if is_rtl %}
+    <nav class="toc" aria-label="في هذه الصفحة">
+      <span class="eyebrow-en" style="margin-bottom:6px">في هذه الصفحة</span>
+      <a href="#p1">١. من أنا</a><a href="#p2">٢. ما الذي أجمعه</a><a href="#p3">٣. لماذا أستخدمه</a><a href="#p4">٤. مع من أشاركه</a><a href="#p5">٥. أين يُحفظ</a><a href="#p6">٦. مدة الاحتفاظ</a><a href="#p7">٧. الأطفال</a><a href="#p8">٨. حقوقك</a><a href="#p9">٩. ملفات تعريف الارتباط</a><a href="#p10">١٠. التواصل والشكاوى</a>
+    </nav>
+    <article class="prose">
+      <section id="p1"><h2>١. من أنا</h2><p>أنا رهف ملاسي، معلّمة لغة عربية خاصة مقيمة في [المدينة]، سوريا. أنا المسؤولة عن المعلومات الشخصية التي تُجمع عبر هذا الموقع. يمكنك التواصل معي على <a href="mailto:{{ email }}" dir="ltr">{{ email }}</a>.</p></section>
+      <section id="p2"><h2>٢. ما الذي أجمعه</h2><ul>
+        <li><strong>بيانات الحجز والتواصل:</strong> اسمك وبريدك الإلكتروني ومستواك والأوقات المفضّلة وما تكتبه في رسالتك.</li>
+        <li><strong>حساب الطالب:</strong> بيانات الدخول وجدول الدروس وتقدّم الواجبات والملفات المشتركة معك والأسئلة التي تطرحها.</li>
+        <li><strong>الرسائل:</strong> كل ما ترسله لي عبر البريد الإلكتروني أو واتساب.</li>
+        <li><strong>النشرة الشهرية:</strong> بريدك الإلكتروني إن اشتركت.</li>
+        <li><strong>بيانات تقنية:</strong> [تحليلات بسيطة مثل الصفحات التي زرتها ونوع الجهاز، إن استُخدمت أداة تحليلات].</li>
+      </ul><p>لا أجمع بيانات بطاقات الدفع على هذا الموقع. [اشرح طريقة الدفع.]</p></section>
+      <section id="p3"><h2>٣. لماذا أستخدمه</h2><ul>
+        <li>لترتيب دروسك وتقديمها وإدارة حساب الطالب (لتقديم الخدمة التي طلبتها).</li>
+        <li>للرد على أسئلتك ورسائلك.</li>
+        <li>لإرسال النشرة الشهرية (بموافقتك فقط، ويمكنك سحبها في أي وقت).</li>
+        <li>للحفاظ على أمان الموقع وعمله.</li>
+      </ul><p>إذا نُشرت إجابة سؤالك في صفحة الأسئلة العامة، أحذف اسمك وأي تفاصيل قد تدلّ عليك.</p></section>
+      <section id="p4"><h2>٤. مع من أشاركه</h2><p>لا أبيع بياناتك أبدًا. أشاركها فقط مع الخدمات التي أحتاجها لتقديم الدروس وتشغيل الموقع:</p><ul>
+        <li>[مزوّد الاستضافة] لتشغيل الموقع وحفظ بيانات الحسابات</li><li>[Zoom / Google Meet] للدروس المباشرة</li><li>[مزوّد البريد الإلكتروني]</li><li>واتساب، إن اخترت التواصل معي عبره</li>
+      </ul></section>
+      <section id="p5"><h2>٥. أين يُحفظ</h2><p>يُستضاف الموقع وبياناته لدى [المزوّد] في [البلد/المنطقة]. ولأنني أدرّس من سوريا، أطّلع على معلوماتك من خارج المملكة المتحدة والاتحاد الأوروبي. [صف الضمانات المتّبعة.]</p></section>
+      <section id="p6"><h2>٦. مدة الاحتفاظ</h2><p>طلبات الدروس التجريبية التي لا تتحوّل إلى دروس: [٦ أشهر]. حسابات الطلاب: طوال فترة الدراسة و[١٢ شهرًا] بعد آخر درس، ثم تُحذف. النشرة: حتى إلغاء الاشتراك.</p></section>
+      <section id="p7"><h2>٧. الأطفال</h2><p>يحجز أحد الوالدين أو وليّ الأمر دروس الأطفال، وهو من يدير الحساب ويتلقى الرسائل. لا أجمع عن الطفل إلا اسمه الأول وفئته العمرية وتقدّمه في التعلّم.</p></section>
+      <section id="p8"><h2>٨. حقوقك</h2><p>يحقّ لك أن تطلب الاطلاع على بياناتك أو تصحيحها أو حذفها أو تقييد استخدامها أو الحصول على نسخة منها. ويمكنك الاعتراض على طريقة استخدامها وسحب موافقتك في أي وقت. راسلني على <a href="mailto:{{ email }}" dir="ltr">{{ email }}</a> وسأرد خلال شهر.</p></section>
+      <section id="p9"><h2>٩. ملفات تعريف الارتباط</h2><p>يستخدم الموقع ملفات تعريف ارتباط ضرورية فقط لإبقائك مسجّلًا الدخول ولحماية النماذج. [أضف هنا أي ملفات تحليلات واطلب الموافقة قبل استخدامها.]</p></section>
+      <section id="p10"><h2>١٠. التواصل والشكاوى</h2><p>لديك سؤال أو ملاحظة؟ راسلني على <a href="mailto:{{ email }}" dir="ltr">{{ email }}</a>. إن كنت في المملكة المتحدة ولم تكن راضيًا عن ردّي، يمكنك تقديم شكوى إلى مكتب مفوّض المعلومات (ICO). وفي الاتحاد الأوروبي، تواصل مع هيئة حماية البيانات المحلية.</p></section>
+    </article>
+    {% else %}
+    <nav class="toc" aria-label="On this page">
+      <span class="eyebrow-en" style="margin-bottom:6px">On this page</span>
+      <a href="#p1">1. Who I am</a><a href="#p2">2. What I collect</a><a href="#p3">3. Why I use it</a><a href="#p4">4. Who I share it with</a><a href="#p5">5. Where it's stored</a><a href="#p6">6. How long I keep it</a><a href="#p7">7. Children</a><a href="#p8">8. Your rights</a><a href="#p9">9. Cookies</a><a href="#p10">10. Contact &amp; complaints</a>
+    </nav>
+    <article class="prose">
+      <section id="p1"><h2>1. Who I am</h2><p>I'm Rahaf Malasy, a private Arabic teacher based in [City], Syria. I'm responsible for the personal information collected through this website. You can contact me at <a href="mailto:{{ email }}">{{ email }}</a>.</p></section>
+      <section id="p2"><h2>2. What I collect</h2><ul>
+        <li><strong>Booking and contact details:</strong> your name, email, level, preferred times and anything you write in your message.</li>
+        <li><strong>Student account:</strong> your login details, lesson schedule, homework progress, files shared with you and questions you ask.</li>
+        <li><strong>Messages:</strong> anything you send me by email or WhatsApp.</li>
+        <li><strong>Newsletter:</strong> your email address, if you subscribe.</li>
+        <li><strong>Technical data:</strong> [basic analytics such as pages visited and device type, if any analytics tool is used].</li>
+      </ul><p>I don't collect payment card details on this site. [Explain how payments are handled.]</p></section>
+      <section id="p3"><h2>3. Why I use it</h2><ul>
+        <li>To arrange and teach your lessons, and run your student account (to provide the service you asked for).</li>
+        <li>To answer your questions and messages (to provide the service, or my legitimate interest in replying to enquiries).</li>
+        <li>To send the monthly newsletter (only with your consent, which you can withdraw at any time).</li>
+        <li>To keep the website secure and working (my legitimate interest).</li>
+      </ul><p>If an answer to your question is shared on the public Q&amp;A page, I remove your name and any details that could identify you.</p></section>
+      <section id="p4"><h2>4. Who I share it with</h2><p>I never sell your data. I only share it with services I need to run lessons and this site:</p><ul>
+        <li>[Website host, e.g. provider name] to run the site and store account data</li><li>[Zoom / Google Meet] for live lessons</li><li>[Email or newsletter provider]</li><li>WhatsApp, if you choose to contact me there</li>
+      </ul></section>
+      <section id="p5"><h2>5. Where it's stored</h2><p>The website and its data are hosted by [provider] in [country/region]. Because I teach from Syria, I access your information from outside the UK and EU. [Describe the safeguards in place for this.]</p></section>
+      <section id="p6"><h2>6. How long I keep it</h2><p>Trial enquiries that don't become lessons: [6 months]. Student accounts: while you're studying with me and [12 months] after your last lesson, then deleted. Newsletter: until you unsubscribe.</p></section>
+      <section id="p7"><h2>7. Children</h2><p>Kids' lessons are booked by a parent or guardian, who manages the account and receives all messages. I only collect the child's first name, age range and learning progress.</p></section>
+      <section id="p8"><h2>8. Your rights</h2><p>You can ask me to show you the data I hold about you, correct it, delete it, limit how I use it, or send it to you in a portable format. You can object to how I use it and withdraw consent at any time. Email <a href="mailto:{{ email }}">{{ email }}</a> and I'll reply within one month.</p></section>
+      <section id="p9"><h2>9. Cookies</h2><p>This site only uses essential cookies to keep you logged in and protect forms. [List any analytics cookies here, and ask for consent before setting them.]</p></section>
+      <section id="p10"><h2>10. Contact &amp; complaints</h2><p>Questions or concerns? Email <a href="mailto:{{ email }}">{{ email }}</a>. If you're in the UK and unhappy with my reply, you can complain to the Information Commissioner's Office (ICO). In the EU, contact your local data protection authority.</p></section>
+    </article>
+    {% endif %}
+  </div>
+</div>
+{% endwith %}
+{% endblock %}

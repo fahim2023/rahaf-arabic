@@ -1,0 +1,18 @@
+{% load site_tags %}
+<header class="dash-head pattern light">
+  <div class="row between gap-12" style="align-items:flex-start">
+    <div class="stack">
+      <span class="hello-ar" lang="ar">{% if greeting_hour < 12 %}صباح الخير{% else %}مساء الخير{% endif %}</span>
+      <span class="hello">Hi, {{ user.first_name|default:"Rahaf" }}</span>
+    </div>
+    <div class="row gap-10">
+      <a href="{% url 'core:home' %}" class="small" style="color:var(--cream)">View site</a>
+      <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button class="link-btn" style="color:var(--cream);text-decoration:none;font-weight:600;font-size:14px" type="submit">Log out</button></form>
+    </div>
+  </div>
+  <div class="dash-stats">
+    <div><b>{{ new_count }}</b><span>new questions</span></div>
+    <div><b>{{ new_bookings }}</b><span>new trial requests</span></div>
+    <div><b>{{ lessons_today }}</b><span>lessons today</span></div>
+  </div>
+</header>

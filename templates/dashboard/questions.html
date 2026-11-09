@@ -1,0 +1,30 @@
+{% extends "dashboard/base.html" %}
+{% load site_tags %}
+{% block dash_title %}Questions{% endblock %}
+{% block top %}
+{% include "dashboard/_head.html" %}
+<div class="tabs" role="tablist" aria-label="Questions">
+  <a role="tab" href="?tab=new" aria-selected="{% if tab == 'new' %}true{% else %}false{% endif %}">New · {{ new_count }}</a>
+  <a role="tab" href="?tab=answered" aria-selected="{% if tab == 'answered' %}true{% else %}false{% endif %}">Answered · {{ answered_count }}</a>
+</div>
+{% endblock %}
+{% block dash %}
+{% for q in list %}
+<a class="dash-card" href="{% url 'dashboard:answer' q.pk %}">
+  <span class="row between gap-10">
+    <span class="chip" style="font-size:12px;padding:3px 10px">{{ q.get_topic_display }}{% if q.status == "draft" %} · draft{% endif %}</span>
+    <span class="small" style="font-size:12px">{{ q.created_at|timesince }} ago</span>
+  </span>
+  <span class="q">{{ q.question }}</span>
+  <span class="row between" style="font-size:13px;color:var(--muted-2)">
+    <span>{% if q.student %}{{ q.student.get_full_name|default:q.student.email }}{% if q.student.profile.is_child %} (parent of {{ q.student.profile.child_first_name }}){% endif %}{% else %}Sample question{% endif %}</span>
+    <span style="color:var(--teal);font-weight:700">{% if tab == "new" %}Answer{% else %}Edit{% endif %} →</span>
+  </span>
+</a>
+{% empty %}
+<div class="center stack gap-6" style="padding:40px 12px;color:var(--muted-2)">
+  <p lang="ar" style="font-family:var(--font-ar);font-size:28px;color:var(--gold-text)">أحسنتِ</p>
+  <p>{% if tab == "new" %}All caught up. No new questions.{% else %}No answered questions yet.{% endif %}</p>
+</div>
+{% endfor %}
+{% endblock %}

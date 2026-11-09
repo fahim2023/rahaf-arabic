@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Book your free trial lesson" %}{% endblock %}
+{% block content %}
+<section class="section section-alt">
+  <div class="container narrow stack gap-28">
+    <div class="section-head">
+      {% include "partials/eyebrow.html" with en="Contact" ar="تواصل معي" %}
+      <h1 class="h2">{% trans "Book your free trial lesson" %}</h1>
+      {% if form.errors %}<p style="color:var(--danger);font-weight:600">{% trans "Please check the highlighted fields." %}</p>{% endif %}
+    </div>
+    <form class="form form-card" method="post" action="{% url 'bookings:book' %}" novalidate>
+      {% csrf_token %}
+      {% include "bookings/_fields.html" %}
+    </form>
+  </div>
+</section>
+{% endblock %}

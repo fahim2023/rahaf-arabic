@@ -1,0 +1,28 @@
+{% load static i18n site_tags %}<!doctype html>
+<html lang="{{ lang }}" dir="{% if is_rtl %}rtl{% else %}ltr{% endif %}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% trans "Learn Arabic with Rahaf" %}{% endblock %}</title>
+<meta name="description" content="{% block description %}{% trans "Patient, personal one-to-one Arabic lessons online with Rahaf Malasy, a native Syrian teacher. Modern Standard, Levantine and Quranic Arabic for adults and children." %}{% endblock %}">
+<link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="{{ request.scheme }}://{{ request.get_host }}{{ url_en }}">
+<link rel="alternate" hreflang="ar" href="{{ request.scheme }}://{{ request.get_host }}{{ url_ar }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="{% static 'css/site.css' %}">
+<meta name="theme-color" content="#1F5C5A">
+{% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+<a class="skip" href="#main">{% trans "Skip to content" %}</a>
+{% block body %}
+{% include "partials/header.html" %}
+{% include "partials/messages.html" %}
+<main id="main">{% block content %}{% endblock %}</main>
+{% block footer %}{% include "partials/footer.html" %}{% endblock %}
+{% endblock %}
+<script src="{% static 'js/site.js' %}" defer></script>
+</body>
+</html>

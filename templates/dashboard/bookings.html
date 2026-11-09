@@ -1,0 +1,42 @@
+{% extends "dashboard/base.html" %}
+{% load site_tags %}
+{% block dash_title %}Trial requests{% endblock %}
+{% block top %}
+<header class="dash-top"><h1 style="padding-inline:8px">Trial requests</h1></header>
+<div class="tabs" role="tablist" aria-label="Filter">
+  <a role="tab" href="?show=open" aria-selected="{% if show == 'open' %}true{% else %}false{% endif %}">Open</a>
+  <a role="tab" href="?show=all" aria-selected="{% if show != 'open' %}true{% else %}false{% endif %}">All</a>
+</div>
+{% endblock %}
+{% block dash %}
+{% for t in list %}
+<article class="dash-card" id="trial-{{ t.pk }}">
+  <span class="row between gap-10">
+    <span class="chip{% if t.status == 'new' %} chip-gold{% endif %}" style="font-size:12px;padding:3px 10px">{{ t.get_status_display }}</span>
+    <span class="small" style="font-size:12px">{{ t.created_at|timesince }} ago · {{ t.language|upper }}</span>
+  </span>
+  <span class="q">{{ t.name }} · {{ t.get_level_display }}</span>
+  <dl class="kv">
+    <dt>Email</dt><dd><a href="mailto:{{ t.email }}">{{ t.email }}</a></dd>
+    {% if t.preferred_times %}<dt>Times</dt><dd>{{ t.preferred_times }}</dd>{% endif %}
+    {% if t.message %}<dt>Message</dt><dd style="white-space:pre-line">{{ t.message }}</dd>{% endif %}
+  </dl>
+  <details class="add">
+    <summary>Update status / notes</summary>
+    <form method="post" action="{% url 'dashboard:update_booking' t.pk %}" class="stack gap-10">
+      {% csrf_token %}
+      <div class="field"><label for="st-{{ t.pk }}">Status</label>
+        <select id="st-{{ t.pk }}" name="status">{% for k, v in statuses %}<option value="{{ k }}"{% if k == t.status %} selected{% endif %}>{{ v }}</option>{% endfor %}</select></div>
+      <div class="field"><label for="nt-{{ t.pk }}">Private notes</label><textarea id="nt-{{ t.pk }}" name="notes" rows="2">{{ t.notes }}</textarea></div>
+      <button class="btn btn-sm" type="submit">Save</button>
+    </form>
+  </details>
+  <div class="row gap-10">
+    <a class="btn btn-sm" href="mailto:{{ t.email }}?subject=Your%20free%20Arabic%20trial%20lesson">{% icon "mail" 16 %} Reply</a>
+    <a class="btn btn-sm btn-outline" href="{% url 'dashboard:students' %}?for={{ t.name|urlencode }}#invite">Create invite code</a>
+  </div>
+</article>
+{% empty %}
+<p class="center small" style="padding:40px 12px">No trial requests here yet.</p>
+{% endfor %}
+{% endblock %}

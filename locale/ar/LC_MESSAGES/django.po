@@ -1,0 +1,1135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-09 23:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: accounts/forms.py:13 accounts/forms.py:34 accounts/forms.py:80
+#: bookings/forms.py:16 templates/accounts/login.html:33
+#: templates/partials/footer.html:14
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: accounts/forms.py:17 accounts/forms.py:40
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: accounts/forms.py:19
+msgid "Your password"
+msgstr "كلمة المرور"
+
+#: accounts/forms.py:21
+msgid "Keep me logged in"
+msgstr "تذكّرني"
+
+#: accounts/forms.py:24
+msgid "That email and password don't match. Please try again."
+msgstr "البريد الإلكتروني وكلمة المرور غير متطابقين. حاول مرة أخرى."
+
+#: accounts/forms.py:25
+msgid "This account is inactive."
+msgstr "هذا الحساب غير مفعّل."
+
+#: accounts/forms.py:32 bookings/forms.py:15 templates/accounts/signup.html:30
+msgid "Your name"
+msgstr "الاسم"
+
+#: accounts/forms.py:33
+msgid "Full name"
+msgstr "الاسم الكامل"
+
+#: accounts/forms.py:36
+msgid "Child's first name"
+msgstr "الاسم الأول للطفل"
+
+#: accounts/forms.py:37
+msgid "First name only"
+msgstr "الاسم الأول فقط"
+
+#: accounts/forms.py:38
+msgid "Age range"
+msgstr "الفئة العمرية"
+
+#: accounts/forms.py:42
+msgid "At least 8 characters"
+msgstr "٨ أحرف على الأقل"
+
+#: accounts/forms.py:43
+msgid "Invite code"
+msgstr "رمز الدعوة"
+
+#: accounts/forms.py:45
+msgid "I agree to the privacy policy."
+msgstr "أوافق على سياسة الخصوصية."
+
+#: accounts/forms.py:46
+msgid "Send me the free monthly worksheet (optional)."
+msgstr "أرسلوا لي ورقة العمل الشهرية المجانية (اختياري)."
+
+#: accounts/forms.py:51
+msgid "There's already an account with this email. Try logging in."
+msgstr "يوجد حساب بهذا البريد الإلكتروني. جرّب تسجيل الدخول."
+
+#: accounts/forms.py:58
+msgid "That invite code isn't valid or has already been used."
+msgstr "رمز الدعوة غير صالح أو استُخدم من قبل."
+
+#: accounts/forms.py:66
+msgid "Please add your child's first name."
+msgstr "يرجى إضافة الاسم الأول للطفل."
+
+#: accounts/forms.py:68
+msgid "Please choose an age range."
+msgstr "يرجى اختيار الفئة العمرية."
+
+#: accounts/models.py:16 templates/accounts/signup.html:24
+msgid "Myself"
+msgstr "أنا"
+
+#: accounts/models.py:16 templates/accounts/signup.html:25
+msgid "My child"
+msgstr "طفلي"
+
+#: accounts/views.py:75
+msgid "Welcome! Your account is ready."
+msgstr "أهلاً بك! حسابك جاهز."
+
+#: accounts/views.py:92
+msgid "Your login link"
+msgstr "رابط تسجيل الدخول"
+
+#: accounts/views.py:93
+msgid ""
+"If that email has an account, a login link is on its way. It works for 20 "
+"minutes."
+msgstr ""
+"إن كان لهذا البريد حساب، فرابط الدخول في طريقه إليك. يعمل الرابط لمدة ٢٠ "
+"دقيقة."
+
+#: accounts/views.py:104
+msgid ""
+"That login link has expired or was already used. Please request a new one."
+msgstr "انتهت صلاحية رابط الدخول أو استُخدم من قبل. اطلب رابطًا جديدًا."
+
+#: bookings/forms.py:17
+msgid "Level / course"
+msgstr "المستوى / الدورة"
+
+#: bookings/forms.py:18
+msgid "Preferred times"
+msgstr "الأوقات المفضّلة"
+
+#: bookings/forms.py:19
+msgid "Message"
+msgstr "رسالتك"
+
+#: bookings/forms.py:22
+msgid "e.g. Sarah"
+msgstr "مثلًا: سارة"
+
+#: bookings/forms.py:24
+msgid "e.g. Weekday evenings, UK time"
+msgstr "مثلًا: مساء أيام الأسبوع، بتوقيت بريطانيا"
+
+#: bookings/forms.py:27
+msgid "Why do you want to learn Arabic? Any experience so far?"
+msgstr "لماذا تريد تعلّم العربية؟ هل لديك أي خبرة سابقة؟"
+
+#: bookings/models.py:7
+msgid "Complete beginner"
+msgstr "مبتدئ تمامًا"
+
+#: bookings/models.py:8
+msgid "Beginner"
+msgstr "مبتدئ"
+
+#: bookings/models.py:9
+msgid "Intermediate"
+msgstr "متوسط"
+
+#: bookings/models.py:10
+msgid "Advanced"
+msgstr "متقدم"
+
+#: bookings/models.py:11
+msgid "Quranic Arabic"
+msgstr "العربية القرآنية"
+
+#: bookings/models.py:12
+msgid "Kids' Classes"
+msgstr "دروس الأطفال"
+
+#: config/settings.py:106
+msgid "English"
+msgstr "الإنجليزية"
+
+#: config/settings.py:106
+msgid "Arabic"
+msgstr "العربية"
+
+#: core/forms.py:7 templates/core/resources.html:67
+msgid "Email address"
+msgstr "البريد الإلكتروني"
+
+#: core/views.py:51
+msgid "You're subscribed. The next worksheet will land in your inbox."
+msgstr "تم الاشتراك. ستصلك ورقة العمل القادمة على بريدك."
+
+#: core/views.py:53
+msgid "Please enter a valid email address."
+msgstr "يرجى إدخال بريد إلكتروني صحيح."
+
+#: portal/models.py:46 qa/models.py:12
+msgid "Writing"
+msgstr "الكتابة"
+
+#: portal/models.py:47
+msgid "Listening"
+msgstr "الاستماع"
+
+#: portal/models.py:48 qa/models.py:15
+msgid "Speaking"
+msgstr "المحادثة"
+
+#: portal/models.py:49 qa/models.py:11
+msgid "Reading"
+msgstr "القراءة"
+
+#: portal/models.py:50 qa/models.py:14
+msgid "Vocabulary"
+msgstr "المفردات"
+
+#: qa/forms.py:11 templates/portal/home.html:102
+msgid "Your question"
+msgstr "سؤالك"
+
+#: qa/forms.py:11
+msgid "Any details (optional)"
+msgstr "تفاصيل إضافية (اختياري)"
+
+#: qa/forms.py:11
+msgid "Topic"
+msgstr "الموضوع"
+
+#: qa/forms.py:13 templates/portal/home.html:103
+msgid "e.g. How do I say “the bill, please” in Levantine?"
+msgstr "مثلًا: كيف أقول «الحساب لو سمحت» بالشامية؟"
+
+#: qa/models.py:10
+msgid "Dialects"
+msgstr "اللهجات"
+
+#: qa/models.py:13
+msgid "Grammar"
+msgstr "القواعد"
+
+#: qa/models.py:16 templates/core/resources.html:18
+#: templates/core/resources.html:30
+msgid "Quranic"
+msgstr "القرآنية"
+
+#: qa/models.py:17 templates/core/resources.html:18
+#: templates/core/resources.html:30
+msgid "Kids"
+msgstr "الأطفال"
+
+#: qa/models.py:18
+msgid "Other"
+msgstr "أخرى"
+
+#: qa/views.py:56
+msgid "Thanks! Your question has gone to Rahaf."
+msgstr "شكرًا! وصل سؤالك إلى رهف."
+
+#: qa/views.py:58
+msgid "Please write your question before sending."
+msgstr "يرجى كتابة سؤالك قبل الإرسال."
+
+#: templates/accounts/auth_base.html:6 templates/accounts/auth_base.html:11
+#: templates/accounts/login.html:3 templates/accounts/signup.html:3
+#: templates/core/privacy.html:3 templates/core/resources.html:3
+#: templates/partials/footer.html:7 templates/partials/header.html:6
+#: templates/portal/home.html:7 templates/qa/list.html:3
+msgid "Rahaf Malasy"
+msgstr "رهف ملاسي"
+
+#: templates/accounts/login.html:3 templates/accounts/login.html:11
+#: templates/accounts/login.html:25
+#: templates/accounts/password_reset_complete.html:7
+#: templates/accounts/signup.html:16 templates/core/home.html:177
+#: templates/core/resources.html:55 templates/partials/header.html:20
+#: templates/qa/list.html:57
+msgid "Log in"
+msgstr "تسجيل الدخول"
+
+#: templates/accounts/login.html:7
+msgid ""
+"Your lessons, homework and answers to your questions are waiting for you."
+msgstr "دروسك وواجباتك وإجابات أسئلتك بانتظارك."
+
+#: templates/accounts/login.html:12
+msgid "For students and parents with an account."
+msgstr "للطلاب والأهل الذين لديهم حساب."
+
+#: templates/accounts/login.html:20
+msgid "Forgot password?"
+msgstr "نسيت كلمة المرور؟"
+
+#: templates/accounts/login.html:21
+msgid "Show"
+msgstr "إظهار"
+
+#: templates/accounts/login.html:21
+msgid "Hide"
+msgstr "إخفاء"
+
+#: templates/accounts/login.html:27
+msgid "or"
+msgstr "أو"
+
+#: templates/accounts/login.html:31
+msgid "Email me a login link"
+msgstr "أرسل لي رابط دخول بالبريد"
+
+#: templates/accounts/login.html:35
+msgid "Send link"
+msgstr "أرسل الرابط"
+
+#: templates/accounts/login.html:40
+msgid "New here?"
+msgstr "جديد هنا؟"
+
+#: templates/accounts/login.html:41
+msgid "Accounts are for current students."
+msgstr "الحسابات مخصّصة للطلاب الحاليين."
+
+#: templates/accounts/login.html:41 templates/accounts/signup.html:3
+#: templates/accounts/signup.html:15
+msgid "Create your account"
+msgstr "أنشئ حسابك"
+
+#: templates/accounts/login.html:41
+msgid "after your trial, or"
+msgstr "بعد الدرس التجريبي، أو"
+
+#: templates/accounts/login.html:41
+msgid "book a free trial"
+msgstr "احجز درسًا تجريبيًا مجانيًا"
+
+#: templates/accounts/login.html:41 templates/accounts/signup.html:54
+msgid "first."
+msgstr "أولًا."
+
+#: templates/accounts/password_reset.html:3
+#: templates/accounts/password_reset.html:6
+msgid "Reset your password"
+msgstr "إعادة تعيين كلمة المرور"
+
+#: templates/accounts/password_reset.html:4
+msgid "It happens to everyone. We'll get you back in."
+msgstr "يحدث هذا للجميع. سنساعدك على الدخول من جديد."
+
+#: templates/accounts/password_reset.html:6
+msgid "Enter your email and we'll send you a link to choose a new password."
+msgstr "أدخل بريدك الإلكتروني وسنرسل لك رابطًا لاختيار كلمة مرور جديدة."
+
+#: templates/accounts/password_reset.html:9
+msgid "Send reset link"
+msgstr "أرسل رابط إعادة التعيين"
+
+#: templates/accounts/password_reset.html:11
+#: templates/accounts/password_reset_done.html:7
+msgid "Back to log in"
+msgstr "العودة إلى تسجيل الدخول"
+
+#: templates/accounts/password_reset_complete.html:3
+#: templates/accounts/password_reset_complete.html:6
+msgid "Password changed"
+msgstr "تم تغيير كلمة المرور"
+
+#: templates/accounts/password_reset_complete.html:6
+msgid "You can now log in with your new password."
+msgstr "يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة."
+
+#: templates/accounts/password_reset_confirm.html:3
+#: templates/accounts/password_reset_confirm.html:7
+msgid "Choose a new password"
+msgstr "اختر كلمة مرور جديدة"
+
+#: templates/accounts/password_reset_confirm.html:11
+msgid "Save password"
+msgstr "احفظ كلمة المرور"
+
+#: templates/accounts/password_reset_confirm.html:14
+msgid "Link expired"
+msgstr "انتهت صلاحية الرابط"
+
+#: templates/accounts/password_reset_confirm.html:14
+msgid "This reset link has expired or was already used."
+msgstr "انتهت صلاحية هذا الرابط أو استُخدم من قبل."
+
+#: templates/accounts/password_reset_confirm.html:15
+msgid "Request a new link"
+msgstr "اطلب رابطًا جديدًا"
+
+#: templates/accounts/password_reset_done.html:3
+#: templates/accounts/password_reset_done.html:6
+msgid "Check your email"
+msgstr "تفقّد بريدك الإلكتروني"
+
+#: templates/accounts/password_reset_done.html:6
+msgid ""
+"If that email has an account, a reset link is on its way. Check your spam "
+"folder too."
+msgstr ""
+"إن كان لهذا البريد حساب، فرابط إعادة التعيين في طريقه إليك. تفقّد مجلد "
+"الرسائل غير المرغوب فيها أيضًا."
+
+#: templates/accounts/signup.html:8
+msgid "See your upcoming lessons"
+msgstr "شاهد دروسك القادمة"
+
+#: templates/accounts/signup.html:9
+msgid "Download notes and homework"
+msgstr "حمّل الملاحظات والواجبات"
+
+#: templates/accounts/signup.html:10
+msgid "Ask questions between lessons"
+msgstr "اطرح أسئلتك بين الدروس"
+
+#: templates/accounts/signup.html:16
+msgid "Already have one?"
+msgstr "لديك حساب؟"
+
+#: templates/accounts/signup.html:22
+msgid "Who is learning?"
+msgstr "من سيتعلّم؟"
+
+#: templates/accounts/signup.html:24
+msgid "Adult learner"
+msgstr "متعلّم بالغ"
+
+#: templates/accounts/signup.html:25
+msgid "I'm the parent or guardian"
+msgstr "أنا وليّ الأمر"
+
+#: templates/accounts/signup.html:30
+msgid "Your name (parent)"
+msgstr "اسمك (وليّ الأمر)"
+
+#: templates/accounts/signup.html:42
+msgid "Use 8 or more characters."
+msgstr "استخدم ٨ أحرف أو أكثر."
+
+#: templates/accounts/signup.html:45
+msgid "(from Rahaf after your trial)"
+msgstr "(من رهف بعد الدرس التجريبي)"
+
+#: templates/accounts/signup.html:48
+msgid "I agree to the"
+msgstr "أوافق على"
+
+#: templates/accounts/signup.html:48 templates/core/resources.html:70
+msgid "privacy policy"
+msgstr "سياسة الخصوصية"
+
+#: templates/accounts/signup.html:52
+msgid "Create account"
+msgstr "إنشاء الحساب"
+
+#: templates/accounts/signup.html:54
+msgid "No invite code yet?"
+msgstr "ليس لديك رمز دعوة بعد؟"
+
+#: templates/accounts/signup.html:54 templates/core/home.html:120
+#: templates/core/resources.html:56 templates/partials/header.html:27
+msgid "Book a free trial"
+msgstr "احجز درسًا تجريبيًا"
+
+#: templates/base.html:6
+msgid "Learn Arabic with Rahaf"
+msgstr "تعلّم العربية مع رهف"
+
+#: templates/base.html:7
+msgid ""
+"Patient, personal one-to-one Arabic lessons online with Rahaf Malasy, a "
+"native Syrian teacher. Modern Standard, Levantine and Quranic Arabic for "
+"adults and children."
+msgstr ""
+"دروس عربية فردية أونلاين بصبر واهتمام مع رهف ملاسي، معلّمة سورية. الفصحى "
+"واللهجة الشامية والعربية القرآنية للكبار والأطفال."
+
+#: templates/base.html:19
+msgid "Skip to content"
+msgstr "تخطَّ إلى المحتوى"
+
+#: templates/bookings/_fields.html:9
+msgid "I'll only use your details to arrange lessons."
+msgstr "سأستخدم بياناتك فقط لترتيب الدروس."
+
+#: templates/bookings/_fields.html:9
+msgid "See the privacy policy."
+msgstr "اطّلع على سياسة الخصوصية."
+
+#: templates/bookings/_fields.html:10
+msgid "Request my free trial"
+msgstr "أرسل طلب الدرس التجريبي"
+
+#: templates/bookings/book.html:3 templates/bookings/book.html:9
+#: templates/core/home.html:214
+msgid "Book your free trial lesson"
+msgstr "احجز درسك التجريبي المجاني"
+
+#: templates/bookings/book.html:10
+msgid "Please check the highlighted fields."
+msgstr "يرجى مراجعة الحقول المحدّدة."
+
+#: templates/bookings/thanks.html:3
+msgid "Trial request received"
+msgstr "وصل طلب الدرس التجريبي"
+
+#: templates/bookings/thanks.html:9
+msgid "Thanks! Your trial request is in"
+msgstr "شكرًا! وصلني طلبك للدرس التجريبي"
+
+#: templates/bookings/thanks.html:10
+#, python-format
+msgid ""
+"I'll reply within %(h)s hours to find a time that suits you. Keep an eye on "
+"your inbox, and check your spam folder just in case."
+msgstr ""
+"سأردّ خلال %(h)s ساعة لنجد وقتًا يناسبك. تابع بريدك الوارد، وتفقّد مجلد "
+"الرسائل غير المرغوب فيها احتياطًا."
+
+#: templates/bookings/thanks.html:12
+msgid "I'll email you"
+msgstr "سأراسلك بالبريد"
+
+#: templates/bookings/thanks.html:12
+msgid "with a few times in your time zone."
+msgstr "مع بعض المواعيد بحسب توقيتك."
+
+#: templates/bookings/thanks.html:13
+msgid "You pick a time"
+msgstr "تختار موعدًا"
+
+#: templates/bookings/thanks.html:13
+msgid "and get a Zoom or Google Meet link."
+msgstr "ويصلك رابط Zoom أو Google Meet."
+
+#: templates/bookings/thanks.html:14
+msgid "We meet"
+msgstr "نلتقي"
+
+#: templates/bookings/thanks.html:14
+#, python-format
+msgid "for a relaxed %(m)s-minute chat about your goals."
+msgstr "في دردشة مريحة مدتها %(m)s دقيقة عن أهدافك."
+
+#: templates/bookings/thanks.html:17
+msgid "Rather chat on WhatsApp?"
+msgstr "تفضّل واتساب؟"
+
+#: templates/bookings/thanks.html:18
+msgid "Get a head start: free resources"
+msgstr "ابدأ مبكرًا: مصادر مجانية"
+
+#: templates/core/home.html:3
+msgid "Learn Arabic with Rahaf · Online Arabic lessons"
+msgstr "تعلّم العربية مع رهف · دروس عربية أونلاين"
+
+#: templates/core/home.html:10
+msgid "Online 1-to-1 lessons · Modern Standard, Levantine & Quranic Arabic"
+msgstr "دروس فردية أونلاين · الفصحى، اللهجة الشامية، والعربية القرآنية"
+
+#: templates/core/home.html:11
+msgid "Learn Arabic with Rahaf: patient, personal online lessons"
+msgstr "تعلّم العربية مع رهف: دروس شخصية بصبر واهتمام"
+
+#: templates/core/home.html:12
+msgid ""
+"Live one-to-one lessons for adults and children, built around your goals and"
+" your pace. From your first letter to confident conversation."
+msgstr ""
+"دروس فردية مباشرة عبر الإنترنت للكبار والأطفال، بخطة تناسب أهدافك ووتيرتك. "
+"من أول حرف حتى المحادثة بثقة."
+
+#: templates/core/home.html:14
+msgid "Book a Free Trial Lesson"
+msgstr "احجز درسًا تجريبيًا مجانيًا"
+
+#: templates/core/home.html:15
+msgid "WhatsApp Me"
+msgstr "راسلني على واتساب"
+
+#: templates/core/home.html:18
+#, python-format
+msgid "%(n)s years teaching"
+msgstr "سنوات التدريس: %(n)s"
+
+#: templates/core/home.html:19
+msgid "Native Syrian speaker"
+msgstr "متحدثة أصلية من سوريا"
+
+#: templates/core/home.html:20
+msgid "Adults & children"
+msgstr "للكبار والأطفال"
+
+#: templates/core/home.html:25
+msgid "Teacher photo coming soon"
+msgstr "صورة المعلّمة قريبًا"
+
+#: templates/core/home.html:27
+msgid "Rahaf Malasy, Arabic teacher"
+msgstr "رهف ملاسي، معلّمة لغة عربية"
+
+#: templates/core/home.html:30
+msgid "Teacher photo"
+msgstr "صورة المعلّمة"
+
+#: templates/core/home.html:47
+msgid "Meet Rahaf"
+msgstr "تعرّف على رهف"
+
+#: templates/core/home.html:50
+msgid "Meet Rahaf · intro video coming soon"
+msgstr "تعرّف على رهف · فيديو تعريفي قريبًا"
+
+#: templates/core/home.html:54
+msgid "years teaching"
+msgstr "سنوات تدريس"
+
+#: templates/core/home.html:55
+msgid "students taught"
+msgstr "طالب وطالبة"
+
+#: templates/core/home.html:56
+msgid "1-to-1"
+msgstr "فردي"
+
+#: templates/core/home.html:56
+msgid "live lessons"
+msgstr "دروس مباشرة"
+
+#: templates/core/home.html:61
+msgid "Hello, I'm Rahaf"
+msgstr "أهلاً، أنا رهف"
+
+#: templates/core/home.html:66
+msgid "Qualifications"
+msgstr "المؤهلات"
+
+#: templates/core/home.html:73
+msgid "Patient pace"
+msgstr "صبر ووتيرة مريحة"
+
+#: templates/core/home.html:73
+msgid "No rushing. Mistakes are part of learning."
+msgstr "لا استعجال، فالأخطاء جزء من التعلّم."
+
+#: templates/core/home.html:74
+msgid "Speak from day one"
+msgstr "محادثة من اليوم الأول"
+
+#: templates/core/home.html:74
+msgid "Real phrases in your very first lesson."
+msgstr "عبارات حقيقية من درسك الأول."
+
+#: templates/core/home.html:75
+msgid "Your goals"
+msgstr "أهدافك أولًا"
+
+#: templates/core/home.html:75
+msgid "Every plan is built around why you're learning."
+msgstr "كل خطة مبنية على سبب تعلّمك."
+
+#: templates/core/home.html:86
+msgid "Courses for every learner"
+msgstr "دروس لكل متعلّم"
+
+#: templates/core/home.html:87
+msgid ""
+"Not sure where you fit? Book a free trial and we'll find your level "
+"together."
+msgstr "لست متأكدًا من مستواك؟ احجز درسًا تجريبيًا مجانيًا وسنحدّده معًا."
+
+#: templates/core/home.html:99
+msgid "Book"
+msgstr "احجز"
+
+#: templates/core/home.html:103
+msgid "Something else in mind?"
+msgstr "لديك هدف آخر؟"
+
+#: templates/core/home.html:104
+msgid ""
+"Arabic for travel, work, or speaking with family? Tell me your goal and I'll"
+" shape lessons around it."
+msgstr ""
+"العربية للسفر أو العمل أو للتواصل مع العائلة؟ أخبرني بهدفك وسأصمّم الدروس "
+"حوله."
+
+#: templates/core/home.html:105
+msgid "Ask me on WhatsApp"
+msgstr "اسألني على واتساب"
+
+#: templates/core/home.html:106
+msgid "Tell me your goal"
+msgstr "أخبرني بهدفك"
+
+#: templates/core/home.html:117
+msgid "How it works"
+msgstr "كيف تبدأ"
+
+#: templates/core/home.html:120
+msgid ""
+"Pick a time that suits you. We'll chat about your level and what you want to"
+" achieve."
+msgstr "اختر وقتًا يناسبك، وسنتحدث عن مستواك وما تريد تحقيقه."
+
+#: templates/core/home.html:121
+msgid "Get a personalised plan"
+msgstr "احصل على خطة شخصية"
+
+#: templates/core/home.html:121
+msgid ""
+"I'll put together a lesson plan for your goal, whether that's travel, faith,"
+" family or work."
+msgstr ""
+"أعدّ لك خطة دروس تناسب هدفك، سواء كان السفر أو الدين أو العائلة أو العمل."
+
+#: templates/core/home.html:122
+msgid "Learn on Zoom or Google Meet"
+msgstr "تعلّم عبر Zoom أو Google Meet"
+
+#: templates/core/home.html:122
+msgid ""
+"Live lessons from anywhere, with notes and practice in your student portal "
+"after every class."
+msgstr ""
+"دروس مباشرة من أي مكان، مع ملاحظات وتمارين تجدها في بوابة الطالب بعد كل درس."
+
+#: templates/core/home.html:133
+msgid "What students say"
+msgstr "آراء الطلاب"
+
+#: templates/core/home.html:142
+msgid ", parent"
+msgstr "، وليّ أمر"
+
+#: templates/core/home.html:156 templates/partials/header.html:15
+#: templates/qa/list.html:3 templates/qa/list.html:9
+msgid "Student Q&A"
+msgstr "أسئلة الطلاب"
+
+#: templates/core/home.html:157 templates/qa/list.html:10
+msgid ""
+"Real questions from my students, answered. Browse, search, or ask your own."
+msgstr "أسئلة حقيقية من طلابي مع إجاباتها. تصفّح، أو ابحث، أو اطرح سؤالك."
+
+#: templates/core/home.html:162 templates/qa/list.html:15
+msgid "Search questions"
+msgstr "ابحث في الأسئلة"
+
+#: templates/core/home.html:163 templates/qa/list.html:16
+msgid "Search questions, e.g. letters"
+msgstr "ابحث في الأسئلة، مثلًا: الحروف"
+
+#: templates/core/home.html:164 templates/qa/list.html:18
+msgid "Search"
+msgstr "بحث"
+
+#: templates/core/home.html:167 templates/core/home.html:169
+msgid "Ask a Question"
+msgstr "اطرح سؤالًا"
+
+#: templates/core/home.html:175 templates/qa/list.html:55
+msgid ""
+"Asking questions is for enrolled students. Log in and your question goes "
+"straight to Rahaf."
+msgstr ""
+"طرح الأسئلة متاح للطلاب المسجّلين. سجّل الدخول وسيصل سؤالك مباشرة إلى رهف."
+
+#: templates/core/home.html:178 templates/qa/list.html:58
+msgid "Become a student"
+msgstr "انضم كطالب"
+
+#: templates/core/home.html:184
+msgid "No questions yet. Students can log in and ask the first one."
+msgstr "لا توجد أسئلة بعد. يمكن للطلاب تسجيل الدخول وطرح أول سؤال."
+
+#: templates/core/home.html:187
+msgid "See all questions"
+msgstr "كل الأسئلة"
+
+#: templates/core/home.html:196
+msgid "Frequently asked questions"
+msgstr "الأسئلة الشائعة"
+
+#: templates/core/home.html:215
+#, python-format
+msgid ""
+"Tell me a little about yourself and when you're free. I reply within %(h)s "
+"hours to arrange a time in your time zone."
+msgstr ""
+"أخبرني قليلًا عن نفسك وعن أوقات فراغك. أردّ خلال %(h)s ساعة لنحدّد موعدًا "
+"حسب توقيتك."
+
+#: templates/core/home.html:218
+msgid "Prefer to chat?"
+msgstr "تفضّل المحادثة؟"
+
+#: templates/core/home.html:219
+msgid "Message me on WhatsApp"
+msgstr "راسلني على واتساب"
+
+#: templates/core/home.html:220
+msgid "Or email"
+msgstr "أو عبر البريد الإلكتروني:"
+
+#: templates/core/privacy.html:3 templates/core/privacy.html:9
+#: templates/partials/footer.html:19
+msgid "Privacy policy"
+msgstr "سياسة الخصوصية"
+
+#: templates/core/resources.html:3 templates/core/resources.html:8
+msgid "Free Arabic resources"
+msgstr "مصادر عربية مجانية"
+
+#: templates/core/resources.html:9
+msgid ""
+"Worksheets, charts and phrase lists I use with my own students. Download, "
+"print and practise at your own pace."
+msgstr ""
+"أوراق عمل وجداول وقوائم عبارات أستخدمها مع طلابي. حمّلها واطبعها وتدرّب على "
+"راحتك."
+
+#: templates/core/resources.html:15
+msgid "Filter resources"
+msgstr "تصفية المصادر"
+
+#: templates/core/resources.html:16 templates/qa/list.html:22
+msgid "All"
+msgstr "الكل"
+
+#: templates/core/resources.html:18 templates/core/resources.html:30
+msgid "Alphabet"
+msgstr "الحروف"
+
+#: templates/core/resources.html:18 templates/core/resources.html:30
+msgid "Levantine"
+msgstr "الشامية"
+
+#: templates/core/resources.html:18 templates/core/resources.html:30
+msgid "MSA"
+msgstr "الفصحى"
+
+#: templates/core/resources.html:36
+msgid "Download"
+msgstr "تحميل"
+
+#: templates/core/resources.html:38
+msgid "Coming soon"
+msgstr "قريبًا"
+
+#: templates/core/resources.html:44
+msgid "No resources in this category yet."
+msgstr "لا توجد مصادر في هذا القسم بعد."
+
+#: templates/core/resources.html:50
+msgid "For my students"
+msgstr "لطلابي"
+
+#: templates/core/resources.html:51
+msgid "Full lesson notes, audio and homework"
+msgstr "ملاحظات الدروس كاملة مع التسجيلات والواجبات"
+
+#: templates/core/resources.html:52
+msgid ""
+"Students get every worksheet, listening exercise and lesson note in their "
+"own portal."
+msgstr ""
+"يحصل الطلاب على كل أوراق العمل وتمارين الاستماع وملاحظات الدروس في بوابتهم "
+"الخاصة."
+
+#: templates/core/resources.html:62
+msgid "A new worksheet every month"
+msgstr "ورقة عمل جديدة كل شهر"
+
+#: templates/core/resources.html:63
+msgid ""
+"One free resource and one useful phrase, straight to your inbox. No spam."
+msgstr "مصدر مجاني وعبارة مفيدة تصلك على بريدك. بلا رسائل مزعجة."
+
+#: templates/core/resources.html:69
+msgid "Subscribe"
+msgstr "اشترك"
+
+#: templates/core/resources.html:70
+msgid "By subscribing you agree to the"
+msgstr "باشتراكك فإنك توافق على"
+
+#: templates/core/resources.html:70
+msgid "Unsubscribe any time."
+msgstr "يمكنك إلغاء الاشتراك في أي وقت."
+
+#: templates/partials/footer.html:19
+msgid "Rahaf Malasy · Online Arabic lessons"
+msgstr "رهف ملاسي · دروس عربية أونلاين"
+
+#: templates/partials/footer.html:20
+msgid "Language"
+msgstr "اللغة"
+
+#: templates/partials/header.html:3
+msgid "Main"
+msgstr "القائمة الرئيسية"
+
+#: templates/partials/header.html:6
+msgid "Arabic Teacher"
+msgstr "معلّمة لغة عربية"
+
+#: templates/partials/header.html:9
+msgid "Menu"
+msgstr "القائمة"
+
+#: templates/partials/header.html:12
+msgid "About"
+msgstr "نبذة عني"
+
+#: templates/partials/header.html:13
+msgid "Courses"
+msgstr "الدروس"
+
+#: templates/partials/header.html:14 templates/portal/home.html:23
+msgid "Resources"
+msgstr "المصادر"
+
+#: templates/partials/header.html:16
+msgid "FAQ"
+msgstr "الأسئلة الشائعة"
+
+#: templates/partials/header.html:18
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+#: templates/partials/header.html:18
+msgid "My portal"
+msgstr "بوابتي"
+
+#: templates/partials/qa_item.html:5
+msgid "Asked by a parent"
+msgstr "سؤال من أحد الأهل"
+
+#: templates/partials/qa_item.html:5
+msgid "Asked by a beginner student"
+msgstr "سؤال من طالب مبتدئ"
+
+#: templates/partials/qa_item.html:5
+msgid "Asked by an intermediate student"
+msgstr "سؤال من طالب متوسط"
+
+#: templates/partials/qa_item.html:5
+msgid "Asked by an advanced student"
+msgstr "سؤال من طالب متقدم"
+
+#: templates/partials/qa_item.html:5
+msgid "Asked by a student"
+msgstr "سؤال من طالب"
+
+#: templates/partials/qa_item.html:11
+msgid "Rahaf answered"
+msgstr "إجابة رهف"
+
+#: templates/portal/home.html:3
+msgid "My learning"
+msgstr "تعلّمي"
+
+#: templates/portal/home.html:3 templates/portal/home.html:7
+msgid "Student portal"
+msgstr "بوابة الطالب"
+
+#: templates/portal/home.html:11
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+#: templates/portal/home.html:17
+msgid "Portal"
+msgstr "البوابة"
+
+#: templates/portal/home.html:18
+msgid "Overview"
+msgstr "نظرة عامة"
+
+#: templates/portal/home.html:19
+msgid "My lessons"
+msgstr "دروسي"
+
+#: templates/portal/home.html:20 templates/portal/home.html:73
+msgid "Homework"
+msgstr "الواجبات"
+
+#: templates/portal/home.html:21
+msgid "Files"
+msgstr "الملفات"
+
+#: templates/portal/home.html:22
+msgid "My questions"
+msgstr "أسئلتي"
+
+#: templates/portal/home.html:29
+#, python-format
+msgid "Welcome back, %(name)s"
+msgstr "أهلاً بعودتك يا %(name)s"
+
+#: templates/portal/home.html:30
+#, python-format
+msgid "%(n)s lesson so far"
+msgid_plural "%(n)s lessons so far"
+msgstr[0] "عدد الدروس حتى الآن: %(n)s"
+msgstr[1] "عدد الدروس حتى الآن: %(n)s"
+msgstr[2] "عدد الدروس حتى الآن: %(n)s"
+msgstr[3] "عدد الدروس حتى الآن: %(n)s"
+msgstr[4] "عدد الدروس حتى الآن: %(n)s"
+msgstr[5] "عدد الدروس حتى الآن: %(n)s"
+
+#: templates/portal/home.html:35
+msgid "Next lesson"
+msgstr "الدرس القادم"
+
+#: templates/portal/home.html:38
+msgid "Your time"
+msgstr "بتوقيتك"
+
+#: templates/portal/home.html:38
+#, python-format
+msgid "%(m)s min"
+msgstr "%(m)s دقيقة"
+
+#: templates/portal/home.html:38
+msgid "Topic:"
+msgstr "الموضوع:"
+
+#: templates/portal/home.html:40
+msgid "Join lesson"
+msgstr "انضم إلى الدرس"
+
+#: templates/portal/home.html:41
+msgid "Reschedule"
+msgstr "تغيير الموعد"
+
+#: templates/portal/home.html:49
+msgid "No lesson booked yet"
+msgstr "لا يوجد درس محجوز بعد"
+
+#: templates/portal/home.html:50
+msgid "Rahaf will add your next lesson here once it's arranged."
+msgstr "ستضيف رهف درسك القادم هنا عند تحديد موعده."
+
+#: templates/portal/home.html:55
+msgid "Your plan"
+msgstr "خطتك"
+
+#: templates/portal/home.html:55
+#, python-format
+msgid "%(p)s%% complete"
+msgstr "مكتملة بنسبة %(p)s%%"
+
+#: templates/portal/home.html:57
+msgid "Plan progress"
+msgstr "التقدّم في الخطة"
+
+#: templates/portal/home.html:63
+msgid ", done"
+msgstr "، مكتمل"
+
+#: templates/portal/home.html:64
+msgid "Now"
+msgstr "الآن"
+
+#: templates/portal/home.html:68
+msgid "Your personalised plan will appear here after your first lessons."
+msgstr "ستظهر خطتك الشخصية هنا بعد دروسك الأولى."
+
+#: templates/portal/home.html:73
+#, python-format
+msgid "%(d)s of %(t)s done"
+msgstr "أُنجز %(d)s من %(t)s"
+
+#: templates/portal/home.html:77
+msgid "Mark as not done"
+msgstr "تحديد كغير منجز"
+
+#: templates/portal/home.html:77
+msgid "Mark as done"
+msgstr "تحديد كمنجز"
+
+#: templates/portal/home.html:79
+msgid "Due"
+msgstr "التسليم"
+
+#: templates/portal/home.html:81
+msgid "No homework right now. Enjoy the break!"
+msgstr "لا واجبات الآن. استمتع بالاستراحة!"
+
+#: templates/portal/home.html:86
+msgid "Shared with you"
+msgstr "ملفات مشتركة معك"
+
+#: templates/portal/home.html:93
+msgid "Lesson notes and audio from Rahaf will appear here."
+msgstr "ستظهر هنا ملاحظات الدروس والتسجيلات من رهف."
+
+#: templates/portal/home.html:97 templates/qa/list.html:45
+msgid "Ask Rahaf a question"
+msgstr "اسأل رهف"
+
+#: templates/portal/home.html:105 templates/qa/list.html:49
+msgid "Answers may be shared on the public Q&A without your name."
+msgstr "قد تُنشر الإجابات في صفحة الأسئلة العامة دون ذكر اسمك."
+
+#: templates/portal/home.html:106 templates/qa/list.html:50
+msgid "Send question"
+msgstr "أرسل السؤال"
+
+#: templates/portal/home.html:113
+msgid "Answered"
+msgstr "تمت الإجابة"
+
+#: templates/portal/home.html:113
+msgid "Waiting"
+msgstr "بانتظار الإجابة"
+
+#: templates/qa/list.html:21
+msgid "Topics"
+msgstr "المواضيع"
+
+#: templates/qa/list.html:28
+msgid "No questions match that yet. Students can log in and ask it."
+msgstr "لا توجد أسئلة مطابقة بعد. يمكن للطلاب تسجيل الدخول وطرحها."
+
+#: templates/qa/list.html:33
+msgid "Pages"
+msgstr "الصفحات"
+
+#: templates/qa/list.html:34
+msgid "Newer"
+msgstr "الأحدث"
+
+#: templates/qa/list.html:36
+msgid "Older"
+msgstr "الأقدم"

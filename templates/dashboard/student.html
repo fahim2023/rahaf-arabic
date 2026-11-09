@@ -1,0 +1,99 @@
+{% extends "dashboard/base.html" %}
+{% load site_tags %}
+{% block dash_title %}{{ student.get_full_name|default:student.email }}{% endblock %}
+{% block top %}
+<header class="dash-top">
+  <a class="icon-btn" href="{% url 'dashboard:students' %}" aria-label="Back to students">{% icon "back" 22 2.2 %}</a>
+  <h1>{{ student.get_full_name|default:student.email }}</h1>
+</header>
+{% endblock %}
+{% block dash %}
+<section class="panel" style="padding:18px">
+  <dl class="kv">
+    <dt>Email</dt><dd><a href="mailto:{{ student.email }}">{{ student.email }}</a></dd>
+    {% if profile.is_child %}<dt>Learner</dt><dd>{{ profile.child_first_name }} (age {{ profile.get_child_age_range_display }})</dd>{% endif %}
+    <dt>Joined</dt><dd>{{ student.date_joined|date:"j M Y" }}</dd>
+    <dt>Newsletter</dt><dd>{{ profile.newsletter|yesno:"Yes,No" }}</dd>
+  </dl>
+  <form method="post" class="stack gap-10">
+    {% csrf_token %}<input type="hidden" name="kind" value="profile">
+    {% include "partials/field.html" with field=profile_form.course_label %}
+    <button class="btn btn-sm" type="submit" style="align-self:flex-start">Save</button>
+  </form>
+</section>
+
+<section class="panel" id="lessons" style="padding:18px">
+  <h2>Lessons</h2>
+  {% for l in lessons %}
+  <div class="list-row">
+    <span class="grow"><b>{{ l.starts_at|date:"D j M, H:i" }}</b> <span class="small">UK · {{ l.duration_minutes }} min{% if l.topic %} · {{ l.topic }}{% endif %}</span></span>
+    <form method="post" action="{% url 'dashboard:student_item' student.pk 'lesson' l.pk %}" data-confirm="Remove this lesson?">{% csrf_token %}<button class="icon-btn" aria-label="Remove lesson">{% icon "trash" 18 %}</button></form>
+  </div>
+  {% empty %}<p class="empty">No lessons yet.</p>{% endfor %}
+  <details class="add"{% if forms.lesson.errors %} open{% endif %}>
+    <summary>+ Add lesson</summary>
+    <form method="post" class="stack gap-10">{% csrf_token %}<input type="hidden" name="kind" value="lesson">
+      {% for f in forms.lesson %}{% include "partials/field.html" with field=f %}{% endfor %}
+      <button class="btn btn-sm" type="submit">Add lesson</button>
+    </form>
+  </details>
+</section>
+
+<section class="panel" id="plan" style="padding:18px">
+  <h2>Learning plan</h2>
+  {% for s in steps %}
+  <div class="list-row">
+    <span class="dot{% if s.done %} done{% elif s.current %} now{% endif %}" aria-hidden="true">{% if s.done %}{% icon "check" 14 3 %}{% endif %}</span>
+    <span class="grow">{{ s.title }}{% if s.current %} <span class="chip chip-gold" style="font-size:12px;padding:1px 8px">Now</span>{% endif %}</span>
+    <form method="post" action="{% url 'dashboard:student_item' student.pk 'step' s.pk %}" class="row gap-6">{% csrf_token %}
+      <button class="btn btn-sm btn-outline" name="action" value="done">{% if s.done %}Undo{% else %}Done{% endif %}</button>
+      {% if not s.current and not s.done %}<button class="btn btn-sm btn-outline" name="action" value="current">Now</button>{% endif %}
+      <button class="icon-btn" name="action" value="delete" aria-label="Remove topic">{% icon "trash" 18 %}</button>
+    </form>
+  </div>
+  {% empty %}<p class="empty">No plan yet.</p>{% endfor %}
+  <details class="add"{% if forms.step.errors %} open{% endif %}>
+    <summary>+ Add plan topic</summary>
+    <form method="post" class="stack gap-10">{% csrf_token %}<input type="hidden" name="kind" value="step">
+      {% for f in forms.step %}{% include "partials/field.html" with field=f %}{% endfor %}
+      <button class="btn btn-sm" type="submit">Add topic</button>
+    </form>
+  </details>
+</section>
+
+<section class="panel" id="homework" style="padding:18px">
+  <h2>Homework</h2>
+  {% for h in homework %}
+  <div class="list-row">
+    <span class="dot{% if h.done %} done{% endif %}" aria-hidden="true">{% if h.done %}{% icon "check" 14 3 %}{% endif %}</span>
+    <span class="grow">{{ h.title }} <span class="small">· {{ h.get_kind_display }}{% if h.due_date %} · due {{ h.due_date|date:"j M" }}{% endif %}</span></span>
+    <form method="post" action="{% url 'dashboard:student_item' student.pk 'homework' h.pk %}" data-confirm="Remove this homework?">{% csrf_token %}<button class="icon-btn" aria-label="Remove homework">{% icon "trash" 18 %}</button></form>
+  </div>
+  {% empty %}<p class="empty">No homework set.</p>{% endfor %}
+  <details class="add"{% if forms.homework.errors %} open{% endif %}>
+    <summary>+ Set homework</summary>
+    <form method="post" class="stack gap-10">{% csrf_token %}<input type="hidden" name="kind" value="homework">
+      {% for f in forms.homework %}{% include "partials/field.html" with field=f %}{% endfor %}
+      <button class="btn btn-sm" type="submit">Set homework</button>
+    </form>
+  </details>
+</section>
+
+<section class="panel" id="files" style="padding:18px">
+  <h2>Files</h2>
+  {% for f in files %}
+  <div class="list-row">
+    <span class="code" style="font-size:11px">{{ f.extension }}</span>
+    <a class="grow" href="{% url 'portal:download' f.pk %}">{{ f.title }}</a>
+    <form method="post" action="{% url 'dashboard:student_item' student.pk 'file' f.pk %}" data-confirm="Delete this file?">{% csrf_token %}<button class="icon-btn" aria-label="Delete file">{% icon "trash" 18 %}</button></form>
+  </div>
+  {% empty %}<p class="empty">No files shared yet.</p>{% endfor %}
+  <details class="add"{% if forms.file.errors %} open{% endif %}>
+    <summary>+ Share a file</summary>
+    <form method="post" enctype="multipart/form-data" class="stack gap-10">{% csrf_token %}<input type="hidden" name="kind" value="file">
+      {% for f in forms.file %}{% include "partials/field.html" with field=f %}{% endfor %}
+      <button class="btn btn-sm" type="submit">Upload</button>
+    </form>
+  </details>
+</section>
+{% endblock %}

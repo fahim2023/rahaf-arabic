@@ -1,0 +1,9 @@
+Hello {{ user.first_name|default:"there" }},
+
+Here's your login link. It works once and expires in 20 minutes:
+
+{{ link }}
+
+If you didn't ask for this, you can ignore this email.
+
+Rahaf Malasy · Arabic lessons

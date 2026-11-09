@@ -1,0 +1,39 @@
+{% extends "dashboard/base.html" %}
+{% load site_tags %}
+{% block dash_title %}Students{% endblock %}
+{% block top %}<header class="dash-top"><h1 style="padding-inline:8px">Students</h1></header>{% endblock %}
+{% block dash %}
+<section class="panel" id="invite" style="padding:18px">
+  <h2>Invite a new student</h2>
+  <p class="small">After the trial, create a code and send it to them. They use it on the sign-up page.</p>
+  <form method="post" class="stack gap-10">
+    {% csrf_token %}
+    <div class="field"><label for="id_note">Who is it for?</label><input id="id_note" name="note" value="{{ request.GET.for }}" placeholder="e.g. Sarah, trial on 10 Nov" maxlength="120"></div>
+    <button class="btn btn-sm" type="submit">{% icon "plus" 16 %} Create invite code</button>
+  </form>
+  {% if invites %}
+  <div>
+    {% for i in invites %}
+    <div class="list-row">
+      <span class="code">{{ i.code }}</span>
+      <span class="grow small">{{ i.note|default:"—" }}</span>
+      <button class="btn btn-sm btn-outline" type="button" data-copy="{{ request.scheme }}://{{ request.get_host }}{% url 'accounts:signup' %}?code={{ i.code }}">Copy link</button>
+      <form method="post" action="{% url 'dashboard:delete_invite' i.pk %}" class="inline-form">{% csrf_token %}<button class="icon-btn" type="submit" aria-label="Delete code {{ i.code }}">{% icon "trash" 18 %}</button></form>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+{% for s in people %}
+<a class="dash-card" href="{% url 'dashboard:student' s.pk %}">
+  <span class="row between gap-10">
+    <span class="q">{{ s.get_full_name|default:s.email }}{% if s.profile.is_child %} <span class="small">· for {{ s.profile.child_first_name }} ({{ s.profile.get_child_age_range_display }})</span>{% endif %}</span>
+    {% if s.open_questions %}<span class="chip chip-gold" style="font-size:12px;padding:2px 10px">{{ s.open_questions }} question{{ s.open_questions|pluralize }}</span>{% endif %}
+  </span>
+  <span class="small">{{ s.profile.course_label|default:"No course set" }} · joined {{ s.date_joined|date:"j M Y" }}</span>
+</a>
+{% empty %}
+<p class="center small" style="padding:24px 12px">No students yet. Create an invite code above.</p>
+{% endfor %}
+{% endblock %}

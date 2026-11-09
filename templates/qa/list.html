@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load i18n site_tags %}
+{% block title %}{% trans "Student Q&A" %} · {% trans "Rahaf Malasy" %}{% endblock %}
+{% block content %}
+<section class="section section-alt" style="padding-top:clamp(40px,6vw,72px)">
+  <div class="container narrow stack gap-28">
+    <div class="section-head">
+      {% include "partials/eyebrow.html" with en="Student Q&A" ar="أسئلة الطلاب" %}
+      <h1 class="h2">{% trans "Student Q&A" %}</h1>
+      <p class="muted" style="max-width:560px">{% trans "Real questions from my students, answered. Browse, search, or ask your own." %}</p>
+    </div>
+
+    <form class="search" method="get" role="search">
+      {% icon "search" 20 %}
+      <label class="sr-only" for="qa-search">{% trans "Search questions" %}</label>
+      <input id="qa-search" type="search" name="q" value="{{ query }}" placeholder="{% trans 'Search questions, e.g. letters' %}">
+      {% if topic %}<input type="hidden" name="topic" value="{{ topic }}">{% endif %}
+      <button class="btn btn-sm" type="submit">{% trans "Search" %}</button>
+    </form>
+
+    <nav class="topic-chips" aria-label="{% trans 'Topics' %}">
+      <a href="?{% if query %}q={{ query|urlencode }}{% endif %}" {% if not topic %}aria-current="true"{% endif %}>{% trans "All" %}</a>
+      {% for key, label in topics %}<a href="?topic={{ key }}{% if query %}&q={{ query|urlencode }}{% endif %}" {% if topic == key %}aria-current="true"{% endif %}>{{ label }}</a>{% endfor %}
+    </nav>
+
+    <div class="stack gap-16">
+      {% for q in page %}{% include "partials/qa_item.html" %}{% empty %}
+        <p class="center muted" style="padding:24px">{% trans "No questions match that yet. Students can log in and ask it." %}</p>
+      {% endfor %}
+    </div>
+
+    {% if page.has_other_pages %}
+    <nav class="row gap-12" style="justify-content:center" aria-label="{% trans 'Pages' %}">
+      {% if page.has_previous %}<a class="btn btn-outline btn-sm" href="?page={{ page.previous_page_number }}{% if query %}&q={{ query|urlencode }}{% endif %}{% if topic %}&topic={{ topic }}{% endif %}">{% trans "Newer" %}</a>{% endif %}
+      <span class="small">{{ page.number|num }} / {{ page.paginator.num_pages|num }}</span>
+      {% if page.has_next %}<a class="btn btn-outline btn-sm" href="?page={{ page.next_page_number }}{% if query %}&q={{ query|urlencode }}{% endif %}{% if topic %}&topic={{ topic }}{% endif %}">{% trans "Older" %}</a>{% endif %}
+    </nav>
+    {% endif %}
+
+    <div id="ask">
+    {% if form %}
+      <form class="form form-card" method="post" action="{% url 'qa:ask' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}#ask">
+        <h2 class="full" style="font-size:22px">{% trans "Ask Rahaf a question" %}</h2>
+        {% include "partials/field.html" with field=form.question full=True %}
+        {% include "partials/field.html" with field=form.topic %}
+        {% include "partials/field.html" with field=form.detail full=True %}
+        <p class="full small">{% trans "Answers may be shared on the public Q&A without your name." %}</p>
+        <button class="btn btn-lg full" type="submit">{% trans "Send question" %}</button>
+      </form>
+    {% else %}
+      <div class="notice">
+        <span style="color:var(--gold-text)">{% icon "lock" 28 %}</span>
+        <p style="flex:1 1 260px">{% trans "Asking questions is for enrolled students. Log in and your question goes straight to Rahaf." %}</p>
+        <div class="row gap-10">
+          <a class="btn btn-sm" href="{% url 'accounts:login' %}?next={{ request.path }}%23ask">{% trans "Log in" %}</a>
+          <a class="btn btn-sm btn-outline" href="{% url 'core:home' %}#contact">{% trans "Become a student" %}</a>
+        </div>
+      </div>
+    {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

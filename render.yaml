@@ -1,0 +1,39 @@
+# One-click setup on Render: New → Blueprint → pick this repo.
+databases:
+  - name: rahaf-db
+    plan: free
+    databaseName: rahaf
+    user: rahaf
+
+services:
+  - type: web
+    name: rahaf-arabic
+    runtime: python
+    plan: free
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: rahaf-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: "3.13.1"
+      - key: TEACHER_EMAIL
+        sync: false
+      - key: SITE_URL
+        sync: false
+      - key: EMAIL_BACKEND
+        value: django.core.mail.backends.smtp.EmailBackend
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+      - key: CLOUDINARY_URL
+        sync: false

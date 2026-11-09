@@ -1,0 +1,55 @@
+{% extends "accounts/auth_base.html" %}
+{% load i18n site_tags %}
+{% block title %}{% trans "Create your account" %} · {% trans "Rahaf Malasy" %}{% endblock %}
+{% block brand %}
+  <p class="big-ar" lang="ar">يلّا نبدأ</p>
+  {% if not is_rtl %}<p style="font-size:20px;font-weight:700;color:#fff">“Let's get started”</p>{% endif %}
+  <ul class="ticks" style="flex-direction:column;color:#DCE6E3;font-size:16px">
+    <li><span style="color:var(--gold-light)">{% icon "check" 18 2.4 %}</span> {% trans "See your upcoming lessons" %}</li>
+    <li><span style="color:var(--gold-light)">{% icon "check" 18 2.4 %}</span> {% trans "Download notes and homework" %}</li>
+    <li><span style="color:var(--gold-light)">{% icon "check" 18 2.4 %}</span> {% trans "Ask questions between lessons" %}</li>
+  </ul>
+{% endblock %}
+{% block form %}
+<div class="stack gap-6">
+  <h1>{% trans "Create your account" %}</h1>
+  <p class="muted">{% trans "Already have one?" %} <a href="{% url 'accounts:login' %}" style="font-weight:700">{% trans "Log in" %}</a></p>
+</div>
+<form method="post" class="stack gap-16" novalidate data-signup>
+  {% csrf_token %}
+  {% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
+  <fieldset style="border:0;margin:0;padding:0" class="stack gap-6">
+    <legend class="label" style="margin-bottom:8px">{% trans "Who is learning?" %}</legend>
+    <div class="who">
+      <label><input type="radio" name="learner" value="self" {% if not is_child %}checked{% endif %}><b>{% trans "Myself" %}</b><span class="small">{% trans "Adult learner" %}</span></label>
+      <label><input type="radio" name="learner" value="child" {% if is_child %}checked{% endif %}><b>{% trans "My child" %}</b><span class="small">{% trans "I'm the parent or guardian" %}</span></label>
+    </div>
+  </fieldset>
+  <div class="form" style="gap:14px;--min:200px">
+    <div class="field{% if form.name.errors %} has-error{% endif %}">
+      <label for="{{ form.name.id_for_label }}"><span data-name-self {% if is_child %}hidden{% endif %}>{% trans "Your name" %}</span><span data-name-child {% if not is_child %}hidden{% endif %}>{% trans "Your name (parent)" %}</span></label>
+      {{ form.name }}{{ form.name.errors }}
+    </div>
+    {% include "partials/field.html" with field=form.email %}
+  </div>
+  <div class="form child-fields" style="gap:14px;--min:200px" data-child-fields {% if not is_child %}hidden{% endif %}>
+    {% include "partials/field.html" with field=form.child_first_name %}
+    {% include "partials/field.html" with field=form.child_age_range %}
+  </div>
+  <div class="field{% if form.password.errors %} has-error{% endif %}">
+    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+    {{ form.password }}
+    <span class="help">{% trans "Use 8 or more characters." %}</span>
+    {{ form.password.errors }}
+  </div>
+  {% trans "(from Rahaf after your trial)" as code_hint %}
+  {% include "partials/field.html" with field=form.invite_code hint=code_hint %}
+  <div class="stack gap-6">
+    <label class="check">{{ form.privacy }} <span>{% trans "I agree to the" %} <a href="{% url 'core:privacy' %}" style="font-weight:700" target="_blank">{% trans "privacy policy" %}</a>.</span></label>
+    {{ form.privacy.errors }}
+  </div>
+  <label class="check">{{ form.newsletter }} {{ form.newsletter.label }}</label>
+  <button class="btn btn-lg btn-block" type="submit">{% trans "Create account" %}</button>
+</form>
+<p class="small center">{% trans "No invite code yet?" %} <a href="{% url 'core:home' %}#contact" style="font-weight:700">{% trans "Book a free trial" %}</a> {% trans "first." %}</p>
+{% endblock %}

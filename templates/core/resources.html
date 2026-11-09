@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n site_tags %}
+{% block title %}{% trans "Free Arabic resources" %} · {% trans "Rahaf Malasy" %}{% endblock %}
+{% block content %}
+<section class="pattern fade-top" style="padding-block:clamp(48px,6vw,80px) clamp(32px,4vw,48px)">
+  <div class="container stack center gap-12" style="max-width:760px">
+    {% include "partials/eyebrow.html" with en="Free resources" ar="مصادر مجانية" %}
+    <h1 class="h2" style="font-size:clamp(34px,4.6vw,54px)">{% trans "Free Arabic resources" %}</h1>
+    <p class="lead" style="max-width:600px">{% trans "Worksheets, charts and phrase lists I use with my own students. Download, print and practise at your own pace." %}</p>
+  </div>
+</section>
+
+<section style="padding-bottom:clamp(56px,8vw,96px)">
+  <div class="container stack gap-28">
+    <nav class="topic-chips" style="justify-content:center" aria-label="{% trans 'Filter resources' %}">
+      <a href="?" {% if not category %}aria-current="true"{% endif %}>{% trans "All" %}</a>
+      {% for key, label in categories %}
+        <a href="?cat={{ key }}" {% if category == key %}aria-current="true"{% endif %}>{% if key == "alphabet" %}{% trans "Alphabet" %}{% elif key == "levantine" %}{% trans "Levantine" %}{% elif key == "msa" %}{% trans "MSA" %}{% elif key == "quranic" %}{% trans "Quranic" %}{% else %}{% trans "Kids" %}{% endif %}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="grid" style="--min:320px">
+      {% for r in items %}
+      <article class="card res">
+        <div class="cover" aria-hidden="true">
+          <span class="glyph" lang="ar">{{ r.glyph }}</span>
+          <span class="fmt">{{ r.file_format }}</span>
+        </div>
+        <div class="body">
+          <span class="chip" style="font-size:13px">{% if r.category == "alphabet" %}{% trans "Alphabet" %}{% elif r.category == "levantine" %}{% trans "Levantine" %}{% elif r.category == "msa" %}{% trans "MSA" %}{% elif r.category == "quranic" %}{% trans "Quranic" %}{% else %}{% trans "Kids" %}{% endif %}</span>
+          <h2>{{ r|t:"title" }}</h2>
+          <p>{{ r|t:"description" }}</p>
+          <div class="row between gap-12" style="margin-top:4px">
+            <span class="small">{{ r|t:"size_note" }}</span>
+            {% if r.file %}
+              <a class="btn btn-sm" href="{{ r.file.url }}" download>{% icon "download" 18 %} {% trans "Download" %}<span class="sr-only"> {{ r|t:"title" }}</span></a>
+            {% else %}
+              <span class="chip chip-gold" style="align-self:center">{% trans "Coming soon" %}</span>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% empty %}
+      <p class="center muted">{% trans "No resources in this category yet." %}</p>
+      {% endfor %}
+    </div>
+
+    <div class="banner section-dark pattern light">
+      <div class="stack gap-10" style="flex:1 1 420px">
+        <span class="row gap-10" style="color:var(--gold-light);font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">{% icon "lock" 18 %} {% trans "For my students" %}</span>
+        <h2 style="font-size:clamp(24px,2.6vw,32px);line-height:1.2;color:#fff">{% trans "Full lesson notes, audio and homework" %}</h2>
+        <p style="color:#CFDCD8">{% trans "Students get every worksheet, listening exercise and lesson note in their own portal." %}</p>
+      </div>
+      <div class="row gap-10">
+        <a class="btn btn-cream" href="{% url 'accounts:login' %}">{% trans "Log in" %}</a>
+        <a class="btn btn-ghost-light" href="{% url 'core:home' %}#contact">{% trans "Book a free trial" %}</a>
+      </div>
+    </div>
+
+    <div class="banner section-alt">
+      <div class="stack gap-6" style="flex:1 1 360px">
+        <h2 style="font-size:24px;line-height:1.25">{% trans "A new worksheet every month" %}</h2>
+        <p class="muted">{% trans "One free resource and one useful phrase, straight to your inbox. No spam." %}</p>
+      </div>
+      <form class="row gap-10" style="flex:1 1 420px" method="post" action="{% url 'core:subscribe' %}">
+        {% csrf_token %}
+        <label class="sr-only" for="{{ newsletter_form.email.id_for_label }}">{% trans "Email address" %}</label>
+        <input class="input" style="flex:1 1 240px;border-radius:999px;min-height:52px" type="email" name="email" id="{{ newsletter_form.email.id_for_label }}" autocomplete="email" placeholder="you@example.com" required>
+        <button class="btn btn-lg" type="submit">{% trans "Subscribe" %}</button>
+        <p class="small" style="width:100%">{% trans "By subscribing you agree to the" %} <a href="{% url 'core:privacy' %}">{% trans "privacy policy" %}</a>. {% trans "Unsubscribe any time." %}</p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

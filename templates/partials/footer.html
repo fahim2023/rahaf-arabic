@@ -1,0 +1,26 @@
+{% load i18n site_tags %}
+<footer class="site-footer">
+  <div class="container stack gap-28">
+    <div class="row between gap-20">
+      <div class="row gap-12">
+        {% logo_mark 48 inverse=True %}
+        <span class="stack" style="line-height:1.4"><span style="font-weight:700;color:#fff;font-size:18px">{% trans "Rahaf Malasy" %}</span><span lang="ar" style="font-family:var(--font-ar);font-size:19px;color:var(--gold-light)">تعلّم العربية بثقة</span></span>
+      </div>
+      <div class="row gap-10">
+        {% if site.instagram_url %}<a class="social" href="{{ site.instagram_url }}" aria-label="Instagram" rel="noopener">{% icon "instagram" 20 1.8 %}</a>{% endif %}
+        {% if site.youtube_url %}<a class="social" href="{{ site.youtube_url }}" aria-label="YouTube" rel="noopener">{% icon "youtube" 20 1.8 %}</a>{% endif %}
+        {% if site.facebook_url %}<a class="social" href="{{ site.facebook_url }}" aria-label="Facebook" rel="noopener">{% icon "facebook" 20 1.8 %}</a>{% endif %}
+        {% if site.whatsapp_link %}<a class="social" href="{{ site.whatsapp_link }}" aria-label="WhatsApp" rel="noopener">{% icon "whatsapp" 20 1.8 %}</a>{% endif %}
+        {% if site.contact_email %}<a class="social" href="mailto:{{ site.contact_email }}" aria-label="{% trans 'Email' %}">{% icon "mail" 20 1.8 %}</a>{% endif %}
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row between gap-16" style="font-size:15px">
+      <span>© {% now "Y" %} {% trans "Rahaf Malasy · Online Arabic lessons" %} · <a href="{% url 'core:privacy' %}">{% trans "Privacy policy" %}</a></span>
+      <div class="lang-switch" role="group" aria-label="{% trans 'Language' %}">
+        <a href="{{ url_en }}" lang="en" dir="ltr" hreflang="en"{% if not is_rtl %} aria-current="page"{% endif %}>English</a>
+        <a href="{{ url_ar }}" lang="ar" dir="rtl" hreflang="ar"{% if is_rtl %} aria-current="page"{% endif %}>العربية</a>
+      </div>
+    </div>
+  </div>
+</footer>

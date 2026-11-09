@@ -1,0 +1,13 @@
+New free trial request
+
+Name: {{ trial.name }}
+Email: {{ trial.email }}
+Level: {{ trial.get_level_display }}
+Preferred times: {{ trial.preferred_times|default:"-" }}
+Booked from the {% if trial.language == "ar" %}Arabic{% else %}English{% endif %} site
+
+Message:
+{{ trial.message|default:"-" }}
+
+Reply to them directly, or open your dashboard:
+{{ link }}

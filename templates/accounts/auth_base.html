@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n site_tags %}
+{% block body %}
+<div class="auth">
+  <aside class="auth-brand pattern light">
+    <a class="logo" href="{% url 'core:home' %}">{% logo_mark 44 inverse=True %}<span class="logo-name">{% trans "Rahaf Malasy" %}</span></a>
+    <div class="stack gap-12" style="max-width:460px">
+      {% block brand %}{% endblock %}
+    </div>
+    <div class="row between gap-12" style="font-size:14px;color:#CFDCD8">
+      <span>© {% now "Y" %} {% trans "Rahaf Malasy" %}</span>
+      {% if is_rtl %}<a href="{{ url_en }}" lang="en" style="color:var(--cream)">English</a>{% else %}<a href="{{ url_ar }}" lang="ar" style="color:var(--cream);font-family:var(--font-ar);font-size:17px">العربية</a>{% endif %}
+    </div>
+  </aside>
+  <main id="main" class="auth-main">
+    <div class="auth-box">
+      {% include "partials/messages.html" %}
+      {% block form %}{% endblock %}
+    </div>
+  </main>
+</div>
+{% endblock %}

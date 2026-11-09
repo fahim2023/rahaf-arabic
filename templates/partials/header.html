@@ -1,0 +1,30 @@
+{% load i18n site_tags %}{% url 'core:home' as home_url %}
+<header class="site-header">
+  <nav class="container nav" aria-label="{% trans 'Main' %}">
+    <a class="logo" href="{{ home_url }}">
+      {% logo_mark 44 %}
+      <span class="logo-text"><span class="logo-name">{% trans "Rahaf Malasy" %}</span><span class="logo-sub">{% trans "Arabic Teacher" %}</span></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" data-menu>
+      {% icon "menu" 22 %}<span class="sr-only">{% trans "Menu" %}</span>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="{{ home_url }}#about">{% trans "About" %}</a>
+      <a href="{{ home_url }}#courses">{% trans "Courses" %}</a>
+      {% url 'core:resources' as res_url %}<a href="{{ res_url }}"{% if request.path == res_url %} aria-current="page"{% endif %}>{% trans "Resources" %}</a>
+      {% url 'qa:list' as qa_url %}<a href="{{ qa_url }}"{% if request.path == qa_url %} aria-current="page"{% endif %}>{% trans "Student Q&A" %}</a>
+      <a href="{{ home_url }}#faq">{% trans "FAQ" %}</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'accounts:after_login' %}">{% if user.is_staff %}{% trans "Dashboard" %}{% else %}{% trans "My portal" %}{% endif %}</a>
+      {% else %}
+        <a href="{% url 'accounts:login' %}">{% trans "Log in" %}</a>
+      {% endif %}
+      {% if is_rtl %}
+        <a class="lang-pill" href="{{ url_en }}" lang="en" dir="ltr" hreflang="en">English</a>
+      {% else %}
+        <a class="lang-pill" href="{{ url_ar }}" lang="ar" dir="rtl" hreflang="ar">العربية</a>
+      {% endif %}
+      <a class="btn" href="{{ home_url }}#contact">{% trans "Book a free trial" %}</a>
+    </div>
+  </nav>
+</header>

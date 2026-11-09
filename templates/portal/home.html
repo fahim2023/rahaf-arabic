@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load i18n site_tags %}
+{% block title %}{% trans "My learning" %} · {% trans "Student portal" %}{% endblock %}
+{% block body %}
+<header class="app-bar">
+  <div class="container row between gap-12" style="padding-block:12px;max-width:1240px">
+    <a class="logo" href="{% url 'core:home' %}">{% logo_mark 44 %}<span class="logo-text"><span class="logo-name" style="font-size:16px">{% trans "Rahaf Malasy" %}</span><span class="small">{% trans "Student portal" %}</span></span></a>
+    <div class="row gap-10">
+      {% if is_rtl %}<a class="lang-pill" href="{{ url_en }}" lang="en">English</a>{% else %}<a class="lang-pill" href="{{ url_ar }}" lang="ar">العربية</a>{% endif %}
+      <span class="avatar gold" aria-hidden="true">{{ user.first_name|default:user.email|slice:":1"|upper }}</span>
+      <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button class="link-btn" style="text-decoration:none;color:var(--ink-3);font-weight:600;padding:10px 6px" type="submit">{% trans "Log out" %}</button></form>
+    </div>
+  </div>
+</header>
+{% include "partials/messages.html" %}
+<div class="container portal" style="max-width:1240px">
+  <nav class="side-nav" aria-label="{% trans 'Portal' %}">
+    <a href="#overview" aria-current="page">{% icon "home" %} {% trans "Overview" %}</a>
+    <a href="#lessons">{% icon "calendar" %} {% trans "My lessons" %}</a>
+    <a href="#homework">{% icon "homework" %} {% trans "Homework" %}</a>
+    <a href="#files">{% icon "file" %} {% trans "Files" %}</a>
+    <a href="#questions">{% icon "chat" %} {% trans "My questions" %}</a>
+    <a href="{% url 'core:resources' %}">{% icon "book" %} {% trans "Resources" %}</a>
+  </nav>
+
+  <main id="main" class="portal-main">
+    <section id="overview" class="stack gap-6">
+      <p class="eyebrow-ar" lang="ar" style="font-size:28px">أهلاً يا {{ profile.learner_name|default:user.first_name }}</p>
+      <h1 style="font-family:var(--font-display);font-size:clamp(28px,3vw,36px);line-height:1.2">{% blocktrans with name=profile.learner_name|default:user.first_name %}Welcome back, {{ name }}{% endblocktrans %}</h1>
+      <p class="muted">{% if profile.course_label %}{{ profile.course_label }} · {% endif %}{% blocktrans count n=lesson_count %}{{ n }} lesson so far{% plural %}{{ n }} lessons so far{% endblocktrans %}</p>
+    </section>
+
+    <div class="grid" style="--min:300px;gap:20px">
+      <section id="lessons" class="panel panel-dark pattern light" aria-labelledby="next-h">
+        <h2 id="next-h">{% trans "Next lesson" %}</h2>
+        {% if next_lesson %}
+          <p class="when"><time datetime="{{ next_lesson.starts_at|date:'c' }}" data-local="full">{{ next_lesson.starts_at|date:"D j M · H:i" }}</time></p>
+          <p style="color:#CFDCD8">{% trans "Your time" %} · {% blocktrans with m=next_lesson.duration_minutes %}{{ m }} min{% endblocktrans %}{% if next_lesson.topic %} · {% trans "Topic:" %} {{ next_lesson.topic }}{% endif %}</p>
+          <div class="row gap-10" style="margin-top:4px">
+            {% if next_lesson.meeting_url %}<a class="btn btn-cream" href="{{ next_lesson.meeting_url }}" target="_blank" rel="noopener">{% icon "video" 18 %} {% trans "Join lesson" %}</a>{% endif %}
+            {% if site.whatsapp_link %}<a href="{{ site.whatsapp_link }}" style="color:var(--cream);font-weight:600;padding:12px 6px" rel="noopener">{% trans "Reschedule" %}</a>{% endif %}
+          </div>
+          {% if later_lessons %}
+          <ul style="list-style:none;margin:6px 0 0;padding:12px 0 0;border-top:1px solid rgba(226,201,143,.3);display:flex;flex-direction:column;gap:6px;color:#DCE6E3;font-size:15px">
+            {% for l in later_lessons %}<li><time datetime="{{ l.starts_at|date:'c' }}" data-local="short">{{ l.starts_at|date:"D j M · H:i" }}</time>{% if l.topic %} · {{ l.topic }}{% endif %}</li>{% endfor %}
+          </ul>
+          {% endif %}
+        {% else %}
+          <p class="when" style="font-size:20px">{% trans "No lesson booked yet" %}</p>
+          <p style="color:#CFDCD8">{% trans "Rahaf will add your next lesson here once it's arranged." %}</p>
+        {% endif %}
+      </section>
+
+      <section class="panel" aria-labelledby="plan-h">
+        <div class="row between gap-12"><h2 id="plan-h">{% trans "Your plan" %}</h2>{% if steps %}<span class="small">{% blocktrans with p=plan_pct|num %}{{ p }}% complete{% endblocktrans %}</span>{% endif %}</div>
+        {% if steps %}
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ plan_pct }}" aria-label="{% trans 'Plan progress' %}"><div style="width:{{ plan_pct }}%"></div></div>
+        <ol class="plan">
+          {% for s in steps %}
+          <li{% if s.current %} style="font-weight:700"{% elif not s.done %} style="color:var(--muted-2)"{% endif %}>
+            <span class="dot{% if s.done %} done{% elif s.current %} now{% endif %}" aria-hidden="true">{% if s.done %}{% icon "check" 14 3 %}{% endif %}</span>
+            {{ s.title }}
+            {% if s.done %}<span class="sr-only">{% trans ", done" %}</span>{% endif %}
+            {% if s.current %}<span class="chip chip-gold" style="font-size:12px;padding:2px 8px">{% trans "Now" %}</span>{% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+        {% else %}<p class="empty">{% trans "Your personalised plan will appear here after your first lessons." %}</p>{% endif %}
+      </section>
+    </div>
+
+    <section id="homework" class="panel" aria-labelledby="hw-h">
+      <div class="row between gap-12"><h2 id="hw-h">{% trans "Homework" %}</h2>{% if homework %}<span class="small">{% blocktrans with d=hw_done|num t=homework|length|num %}{{ d }} of {{ t }} done{% endblocktrans %}</span>{% endif %}</div>
+      {% for h in homework %}
+      <div class="hw{% if h.done %} done{% endif %}">
+        <form method="post" action="{% url 'portal:toggle_homework' h.pk %}">{% csrf_token %}
+          <button type="submit" aria-pressed="{% if h.done %}true{% else %}false{% endif %}" aria-label="{% if h.done %}{% trans 'Mark as not done' %}{% else %}{% trans 'Mark as done' %}{% endif %}: {{ h.title }}">{% icon "check" 14 3 %}</button>
+        </form>
+        <span class="stack" style="min-width:0"><span class="title" style="font-weight:600">{{ h.title }}</span><span class="small">{% if h.due_date %}{% trans "Due" %} {{ h.due_date|date:"D j M" }} · {% endif %}{{ h.get_kind_display }}</span></span>
+      </div>
+      {% empty %}<p class="empty">{% trans "No homework right now. Enjoy the break!" %}</p>{% endfor %}
+    </section>
+
+    <div class="grid" style="--min:320px;gap:20px;align-items:start">
+      <section id="files" class="panel" aria-labelledby="files-h">
+        <h2 id="files-h">{% trans "Shared with you" %}</h2>
+        {% for f in files %}
+        <a class="file" href="{% url 'portal:download' f.pk %}">
+          <span class="ext" aria-hidden="true">{{ f.extension }}</span>
+          <span class="stack grow" style="line-height:1.35"><span style="font-weight:600">{{ f.title }}</span><span class="small">{{ f.created_at|timesince }}</span></span>
+          <span style="color:var(--teal)">{% icon "download" 20 %}</span>
+        </a>
+        {% empty %}<p class="empty">{% trans "Lesson notes and audio from Rahaf will appear here." %}</p>{% endfor %}
+      </section>
+
+      <section id="questions" class="panel" aria-labelledby="q-h">
+        <h2 id="q-h">{% trans "Ask Rahaf a question" %}</h2>
+        <form method="post" action="{% url 'qa:ask' %}" class="stack gap-10">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'portal:home' %}#questions">
+          <input type="hidden" name="topic" value="other">
+          <label class="sr-only" for="ask-box">{% trans "Your question" %}</label>
+          <textarea class="input" id="ask-box" name="question" rows="3" maxlength="300" required placeholder="{% trans 'e.g. How do I say “the bill, please” in Levantine?' %}" style="resize:vertical"></textarea>
+          <div class="row between gap-10">
+            <span class="small" style="flex:1 1 200px">{% trans "Answers may be shared on the public Q&A without your name." %}</span>
+            <button class="btn" type="submit">{% trans "Send question" %}</button>
+          </div>
+        </form>
+        {% if my_questions %}<div style="height:1px;background:var(--sand-3);margin:4px 0"></div>{% endif %}
+        {% for q in my_questions %}
+        <div class="mini-q">
+          <span class="row between gap-10" style="align-items:flex-start"><span style="font-weight:600" class="grow">{{ q.question }}</span>
+          {% if q.status == "answered" %}<span class="chip" style="font-size:12px;padding:2px 10px">{% trans "Answered" %}</span>{% else %}<span class="chip chip-gold" style="font-size:12px;padding:2px 10px">{% trans "Waiting" %}</span>{% endif %}</span>
+          {% if q.status == "answered" %}<span style="font-size:15px;color:var(--ink-3);white-space:pre-line">{{ q.answer }}</span>{% endif %}
+        </div>
+        {% endfor %}
+      </section>
+    </div>
+  </main>
+</div>
+{% endblock %}

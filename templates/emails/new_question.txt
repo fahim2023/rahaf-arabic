@@ -1,0 +1,10 @@
+A student asked a new question
+
+"{{ question.question }}"
+{% if question.detail %}
+{{ question.detail }}
+{% endif %}
+From: {% if question.student %}{{ question.student.get_full_name|default:question.student.email }}{% endif %}
+
+Answer it here:
+{{ link }}

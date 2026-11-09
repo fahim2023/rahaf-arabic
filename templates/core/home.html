@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% load i18n site_tags %}
+{% block title %}{% trans "Learn Arabic with Rahaf · Online Arabic lessons" %}{% endblock %}
+{% block content %}
+
+{# ---------------- HERO ---------------- #}
+<section class="hero pattern fade-end">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="chip chip-lg">{% trans "Online 1-to-1 lessons · Modern Standard, Levantine & Quranic Arabic" %}</p>
+      <h1>{% trans "Learn Arabic with Rahaf: patient, personal online lessons" %}</h1>
+      <p class="lead" style="max-width:580px">{% trans "Live one-to-one lessons for adults and children, built around your goals and your pace. From your first letter to confident conversation." %}</p>
+      <div class="row gap-12" style="margin-top:6px">
+        <a class="btn btn-lg btn-shadow" href="#contact">{% trans "Book a Free Trial Lesson" %} {% icon "arrow" 18 %}</a>
+        {% if site.whatsapp_link %}<a class="btn btn-lg btn-outline" href="{{ site.whatsapp_link }}" rel="noopener">{% icon "whatsapp" 20 %} {% trans "WhatsApp Me" %}</a>{% endif %}
+      </div>
+      <ul class="ticks">
+        <li>{% icon "check" 18 2.2 %} {% blocktrans with n=site.years_teaching|num %}{{ n }} years teaching{% endblocktrans %}</li>
+        <li>{% icon "check" 18 2.2 %} {% trans "Native Syrian speaker" %}</li>
+        <li>{% icon "check" 18 2.2 %} {% trans "Adults & children" %}</li>
+      </ul>
+    </div>
+    <div class="hero-photo">
+      <div class="frame"></div>
+      <div class="photo" {% if not site.teacher_photo %}role="img" aria-label="{% trans 'Teacher photo coming soon' %}"{% endif %}>
+        {% if site.teacher_photo %}
+          <img src="{{ site.teacher_photo.url }}" alt="{% trans 'Rahaf Malasy, Arabic teacher' %}" width="440" height="550">
+        {% else %}
+          {% icon "user" 64 1.4 %}
+          <span style="font-size:15px;font-weight:600">{% trans "Teacher photo" %}</span>
+        {% endif %}
+      </div>
+      <div class="welcome-badge">
+        <span class="ar" lang="ar">أهلاً وسهلاً</span>
+        {% if not is_rtl %}<span class="small">“Welcome”</span>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ---------------- ABOUT ---------------- #}
+<section id="about" class="section section-alt">
+  <div class="container about-grid">
+    <div class="stack gap-16">
+      <div class="video pattern light" style="position:relative">
+        {% if site.intro_video_url %}
+          <iframe src="{{ site.intro_video_url }}" title="{% trans 'Meet Rahaf' %}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        {% else %}
+          <span class="play">{% icon "play" 28 %}</span>
+          <span class="caption">{% trans "Meet Rahaf · intro video coming soon" %}</span>
+        {% endif %}
+      </div>
+      <div class="stats">
+        <div class="stat"><b>{{ site.years_teaching|num }}+</b><span>{% trans "years teaching" %}</span></div>
+        <div class="stat"><b>{{ site.students_taught|num }}+</b><span>{% trans "students taught" %}</span></div>
+        <div class="stat"><b>{% trans "1-to-1" %}</b><span>{% trans "live lessons" %}</span></div>
+      </div>
+    </div>
+    <div class="stack gap-16">
+      {% include "partials/eyebrow.html" with en="About me" ar="نبذة عني" %}
+      <h2 class="h2">{% trans "Hello, I'm Rahaf" %}</h2>
+      {% if site|t:"story" %}<p style="color:var(--ink-3);white-space:pre-line">{{ site|t:"story" }}</p>{% endif %}
+      {% if site|t:"story2" %}<p style="color:var(--ink-3);white-space:pre-line">{{ site|t:"story2" }}</p>{% endif %}
+      {% with quals=site.qualification_list %}{% if quals %}
+      <div class="stack gap-10" style="margin-top:4px">
+        <h3 style="font-size:16px;color:var(--gold-text)">{% trans "Qualifications" %}</h3>
+        <ul class="qual-list">
+          {% for q in quals %}<li><span style="color:var(--teal)">{% cycle "grad" "award" "clock" as ic silent %}{% icon ic 20 %}</span>{{ q }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}{% endwith %}
+      <div class="grid" style="--min:160px;gap:12px;margin-top:6px">
+        <div class="card-flat"><div style="font-weight:700">{% trans "Patient pace" %}</div><div class="small">{% trans "No rushing. Mistakes are part of learning." %}</div></div>
+        <div class="card-flat"><div style="font-weight:700">{% trans "Speak from day one" %}</div><div class="small">{% trans "Real phrases in your very first lesson." %}</div></div>
+        <div class="card-flat"><div style="font-weight:700">{% trans "Your goals" %}</div><div class="small">{% trans "Every plan is built around why you're learning." %}</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ---------------- COURSES ---------------- #}
+<section id="courses" class="section">
+  <div class="container stack gap-40">
+    <div class="section-head">
+      {% include "partials/eyebrow.html" with en="Courses" ar="الدروس" %}
+      <h2 class="h2">{% trans "Courses for every learner" %}</h2>
+      <p class="muted" style="max-width:560px">{% trans "Not sure where you fit? Book a free trial and we'll find your level together." %}</p>
+    </div>
+    <div class="grid" style="--min:320px">
+      {% for c in courses %}
+      <article class="card course{% if c.highlighted %} dark{% endif %}">
+        <div class="top">
+          <span class="chip{% if forloop.counter == 5 %} chip-gold{% endif %}">{{ c|t:"level_label" }}</span>
+          {% if is_rtl %}<span class="alt-name" lang="en" dir="ltr">{{ c.name_en }}</span>{% elif c.name_ar %}<span class="alt-name" lang="ar">{{ c.name_ar }}</span>{% endif %}
+        </div>
+        <h3>{{ c|t:"name" }}</h3>
+        <p class="desc">{{ c|t:"description" }}</p>
+        <div class="meta"><span>{{ c|t:"duration" }}</span>{% if c.price_display %}<span>{{ c.price_display }}</span>{% endif %}</div>
+        <a class="btn {% if c.highlighted %}btn-cream{% endif %} btn-block" href="#contact" data-level="{% if c.name_en == 'Quranic Arabic' %}quranic{% elif c.name_en == "Kids' Classes" %}kids{% else %}{{ c.name_en|lower }}{% endif %}">{% trans "Book" %}<span class="sr-only"> {{ c|t:"name" }}</span></a>
+      </article>
+      {% endfor %}
+      <article class="card-dashed course" style="justify-content:center">
+        <h3>{% trans "Something else in mind?" %}</h3>
+        <p class="desc" style="flex:none">{% trans "Arabic for travel, work, or speaking with family? Tell me your goal and I'll shape lessons around it." %}</p>
+        {% if site.whatsapp_link %}<a href="{{ site.whatsapp_link }}" style="font-weight:700;padding:10px 0" rel="noopener">{% trans "Ask me on WhatsApp" %} <span class="flip" style="display:inline-block">→</span></a>
+        {% else %}<a href="#contact" style="font-weight:700;padding:10px 0">{% trans "Tell me your goal" %} <span class="flip" style="display:inline-block">→</span></a>{% endif %}
+      </article>
+    </div>
+  </div>
+</section>
+
+{# ---------------- HOW IT WORKS ---------------- #}
+<section class="section section-dark pattern light">
+  <div class="container stack gap-40">
+    <div class="section-head">
+      {% include "partials/eyebrow.html" with en="How it works" ar="كيف تبدأ" %}
+      <h2 class="h2">{% trans "How it works" %}</h2>
+    </div>
+    <ol class="steps grid" style="--min:280px">
+      <li class="step"><span class="n">{{ 1|num }}</span><h3>{% trans "Book a free trial" %}</h3><p>{% trans "Pick a time that suits you. We'll chat about your level and what you want to achieve." %}</p></li>
+      <li class="step"><span class="n">{{ 2|num }}</span><h3>{% trans "Get a personalised plan" %}</h3><p>{% trans "I'll put together a lesson plan for your goal, whether that's travel, faith, family or work." %}</p></li>
+      <li class="step"><span class="n">{{ 3|num }}</span><h3>{% trans "Learn on Zoom or Google Meet" %}</h3><p>{% trans "Live lessons from anywhere, with notes and practice in your student portal after every class." %}</p></li>
+    </ol>
+  </div>
+</section>
+
+{# ---------------- TESTIMONIALS (only when Rahaf has added real ones) ---------------- #}
+{% if testimonials %}
+<section class="section">
+  <div class="container stack gap-40">
+    <div class="section-head">
+      {% include "partials/eyebrow.html" with en="Testimonials" ar="آراء الطلاب" %}
+      <h2 class="h2">{% trans "What students say" %}</h2>
+    </div>
+    <div class="grid">
+      {% for t in testimonials %}
+      <figure class="card quote">
+        <span class="mark" aria-hidden="true">{% if is_rtl %}”{% else %}“{% endif %}</span>
+        <blockquote>{{ t|t:"quote" }}</blockquote>
+        <figcaption class="row gap-12">
+          <span class="avatar{% if forloop.counter == 2 %} gold{% endif %}" aria-hidden="true">{{ t.name|slice:":1" }}</span>
+          <span class="stack" style="line-height:1.4"><span style="font-weight:700">{{ t.name }}{% if t.is_parent %}{% trans ", parent" %}{% endif %}</span><span class="small">{{ t|t:"country" }}{% if t|t:"course" %} · {{ t|t:"course" }}{% endif %}</span></span>
+        </figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{# ---------------- STUDENT Q&A ---------------- #}
+<section id="qa" class="section section-alt">
+  <div class="container narrow stack gap-28">
+    <div class="section-head">
+      {% include "partials/eyebrow.html" with en="Student Q&A" ar="أسئلة الطلاب" %}
+      <h2 class="h2">{% trans "Student Q&A" %}</h2>
+      <p class="muted" style="max-width:560px">{% trans "Real questions from my students, answered. Browse, search, or ask your own." %}</p>
+    </div>
+    <div class="row gap-12" style="align-items:stretch">
+      <form class="search" action="{% url 'qa:list' %}" method="get" role="search">
+        {% icon "search" 20 %}
+        <label class="sr-only" for="qa-search">{% trans "Search questions" %}</label>
+        <input id="qa-search" type="search" name="q" placeholder="{% trans 'Search questions, e.g. letters' %}">
+        <button class="btn btn-sm" type="submit">{% trans "Search" %}</button>
+      </form>
+      {% if user.is_authenticated %}
+        <a class="btn btn-lg" href="{% url 'qa:list' %}#ask">{% icon "plus" 18 %} {% trans "Ask a Question" %}</a>
+      {% else %}
+        <button class="btn btn-lg" type="button" data-toggle="ask-notice" aria-expanded="false" aria-controls="ask-notice">{% icon "plus" 18 %} {% trans "Ask a Question" %}</button>
+      {% endif %}
+    </div>
+    {% if not user.is_authenticated %}
+    <div class="notice" id="ask-notice" hidden>
+      <span style="color:var(--gold-text)">{% icon "lock" 28 %}</span>
+      <p style="flex:1 1 260px">{% trans "Asking questions is for enrolled students. Log in and your question goes straight to Rahaf." %}</p>
+      <div class="row gap-10">
+        <a class="btn btn-sm" href="{% url 'accounts:login' %}?next={% url 'qa:list' %}%23ask">{% trans "Log in" %}</a>
+        <a class="btn btn-sm btn-outline" href="#contact">{% trans "Become a student" %}</a>
+      </div>
+    </div>
+    {% endif %}
+    <div class="stack gap-16">
+      {% for q in questions %}{% include "partials/qa_item.html" %}{% empty %}
+        <p class="center muted" style="padding:24px">{% trans "No questions yet. Students can log in and ask the first one." %}</p>
+      {% endfor %}
+    </div>
+    {% if questions|length >= 4 %}<a class="btn btn-outline" style="align-self:center" href="{% url 'qa:list' %}">{% trans "See all questions" %} {% icon "arrow" 18 %}</a>{% endif %}
+  </div>
+</section>
+
+{# ---------------- FAQ ---------------- #}
+<section id="faq" class="section">
+  <div class="container narrower stack gap-28">
+    <div class="section-head">
+      {% include "partials/eyebrow.html" with en="FAQ" ar="الأسئلة الشائعة" %}
+      <h2 class="h2">{% trans "Frequently asked questions" %}</h2>
+    </div>
+    <div class="stack gap-12">
+      {% for f in faqs %}
+      <details class="faq"{% if forloop.first %} open{% endif %}>
+        <summary><span>{{ f|t:"question" }}</span><span class="sign" aria-hidden="true"></span></summary>
+        <p class="body" style="white-space:pre-line">{{ f|t:"answer" }}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ---------------- CONTACT / BOOKING ---------------- #}
+<section id="contact" class="section section-alt">
+  <div class="container row gap-40" style="align-items:flex-start">
+    <div class="stack gap-16" style="flex:1 1 340px;min-width:0">
+      {% include "partials/eyebrow.html" with en="Contact" ar="تواصل معي" %}
+      <h2 class="h2">{% trans "Book your free trial lesson" %}</h2>
+      <p style="color:var(--ink-3)">{% blocktrans with h=site.reply_hours|num %}Tell me a little about yourself and when you're free. I reply within {{ h }} hours to arrange a time in your time zone.{% endblocktrans %}</p>
+      {% if site.whatsapp_link or site.contact_email %}
+      <div class="card-flat stack gap-12" style="padding:22px;border-radius:22px">
+        <p style="font-weight:700">{% trans "Prefer to chat?" %}</p>
+        {% if site.whatsapp_link %}<a class="btn btn-lg" href="{{ site.whatsapp_link }}" rel="noopener">{% icon "whatsapp" 20 %} {% trans "Message me on WhatsApp" %}</a>{% endif %}
+        {% if site.contact_email %}<p class="small">{% trans "Or email" %} <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a></p>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+    <form class="form form-card" style="flex:1.4 1 440px;min-width:0" method="post" action="{% url 'bookings:book' %}" novalidate>
+      {% csrf_token %}
+      {% include "bookings/_fields.html" with form=booking_form %}
+    </form>
+  </div>
+</section>
+{% endblock %}

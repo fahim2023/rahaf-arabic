@@ -1,0 +1,44 @@
+{% extends "dashboard/base.html" %}
+{% load site_tags %}
+{% block dash_title %}Answer question{% endblock %}
+{% block top %}
+<header class="dash-top">
+  <a class="icon-btn" href="{% url 'dashboard:questions' %}" aria-label="Back to questions">{% icon "back" 22 2.2 %}</a>
+  <h1>{% if q.status == "answered" %}Edit answer{% else %}Answer question{% endif %}</h1>
+</header>
+{% endblock %}
+{% block dash %}
+<div class="card-flat stack gap-6" style="padding:16px;border-radius:18px">
+  <span class="row between gap-10"><span class="chip" style="font-size:12px;padding:3px 10px">{{ q.get_topic_display }}</span><span class="small" style="font-size:12px">{{ q.created_at|date:"j M Y, H:i" }}</span></span>
+  <p style="font-size:17px;font-weight:700;line-height:1.4">{{ q.question }}</p>
+  {% if q.detail %}<p style="font-size:14px;color:var(--ink-3);white-space:pre-line">{{ q.detail }}</p>{% endif %}
+  <span class="small">{% if q.student %}{{ q.student.get_full_name|default:q.student.email }} · {{ q.student.email }}{% else %}Sample question{% endif %}</span>
+</div>
+<form method="post" class="stack gap-12">
+  {% csrf_token %}
+  {% include "partials/field.html" with field=form.answer %}
+  <div class="row gap-10">
+    <button type="button" class="btn btn-sm btn-outline" data-insert="شكرًا" data-target="{{ form.answer.id_for_label }}">+ شكرًا</button>
+    <button type="button" class="btn btn-sm btn-outline" data-insert="أهلاً" data-target="{{ form.answer.id_for_label }}">+ أهلاً</button>
+    <button type="button" class="btn btn-sm btn-outline" data-insert="مرحبا" data-target="{{ form.answer.id_for_label }}">+ مرحبا</button>
+  </div>
+  <label class="check">{{ form.is_public }} {{ form.is_public.label }}</label>
+  <details class="add">
+    <summary>Topic, label &amp; Arabic version</summary>
+    <div class="stack gap-12">
+      {% include "partials/field.html" with field=form.topic %}
+      {% include "partials/field.html" with field=form.asker_label %}
+      {% include "partials/field.html" with field=form.question_ar %}
+      {% include "partials/field.html" with field=form.answer_ar %}
+    </div>
+  </details>
+  <p class="small">{% if q.student %}The student gets an email when you first publish.{% else %}Published answers appear on the public Q&amp;A page.{% endif %}</p>
+  <div class="dash-actions">
+    <button class="btn btn-outline" type="submit" name="save">Save draft</button>
+    <button class="btn" type="submit" name="publish" style="flex:1.4">Publish answer</button>
+  </div>
+</form>
+<form method="post" action="{% url 'dashboard:delete_question' q.pk %}" data-confirm="Delete this question for good?">
+  {% csrf_token %}<button class="btn btn-sm btn-danger" type="submit">{% icon "trash" 16 %} Delete question</button>
+</form>
+{% endblock %}

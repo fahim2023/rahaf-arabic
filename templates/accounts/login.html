@@ -1,0 +1,43 @@
+{% extends "accounts/auth_base.html" %}
+{% load i18n site_tags %}
+{% block title %}{% trans "Log in" %} · {% trans "Rahaf Malasy" %}{% endblock %}
+{% block brand %}
+  <p class="big-ar" lang="ar">أهلاً بعودتك</p>
+  {% if not is_rtl %}<p style="font-size:20px;font-weight:700;color:#fff">Welcome back</p>{% endif %}
+  <p style="color:#CFDCD8">{% trans "Your lessons, homework and answers to your questions are waiting for you." %}</p>
+{% endblock %}
+{% block form %}
+<div class="stack gap-6">
+  <h1>{% trans "Log in" %}</h1>
+  <p class="muted">{% trans "For students and parents with an account." %}</p>
+</div>
+<form method="post" class="stack gap-16" novalidate>
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+  {% if form.non_field_errors %}<div style="background:#FBEDE8;border-radius:14px;padding:12px 16px">{{ form.non_field_errors }}</div>{% endif %}
+  {% include "partials/field.html" with field=form.username %}
+  <div class="field{% if form.password.errors %} has-error{% endif %}">
+    <div class="row between gap-12"><label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label><a href="{% url 'accounts:password_reset' %}" style="font-size:14px;font-weight:600">{% trans "Forgot password?" %}</a></div>
+    <div class="pw-wrap">{{ form.password }}<button type="button" data-show-pass aria-pressed="false" data-show="{% trans 'Show' %}" data-hide="{% trans 'Hide' %}">{% trans "Show" %}</button></div>
+    {{ form.password.errors }}
+  </div>
+  <label class="check">{{ form.remember }} {{ form.remember.label }}</label>
+  <button class="btn btn-lg btn-block" type="submit">{% trans "Log in" %}</button>
+</form>
+<div class="or">{% trans "or" %}</div>
+<form method="post" action="{% url 'accounts:email_login_link' %}" class="stack gap-10">
+  {% csrf_token %}
+  <details>
+    <summary class="btn btn-outline btn-block" style="list-style:none">{% icon "mail" 18 %} {% trans "Email me a login link" %}</summary>
+    <div class="row gap-10" style="margin-top:12px">
+      <label class="sr-only" for="link-email">{% trans "Email" %}</label>
+      <input class="input" id="link-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required style="flex:1 1 200px">
+      <button class="btn" type="submit">{% trans "Send link" %}</button>
+    </div>
+  </details>
+</form>
+<div class="card-flat stack gap-6" style="background:var(--sand-2);border:0;padding:16px 18px">
+  <span style="font-weight:700">{% trans "New here?" %}</span>
+  <span style="color:var(--ink-3);font-size:15px">{% trans "Accounts are for current students." %} <a href="{% url 'accounts:signup' %}" style="font-weight:700">{% trans "Create your account" %}</a> {% trans "after your trial, or" %} <a href="{% url 'core:home' %}#contact" style="font-weight:700">{% trans "book a free trial" %}</a> {% trans "first." %}</span>
+</div>
+{% endblock %}

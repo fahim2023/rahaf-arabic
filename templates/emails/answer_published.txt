@@ -1,0 +1,12 @@
+Hello {{ question.student.first_name|default:"there" }},
+
+Rahaf has answered your question:
+
+"{{ question.question }}"
+
+{{ question.answer }}
+
+See it in your student portal:
+{{ link }}
+
+Rahaf Malasy · Arabic lessons
