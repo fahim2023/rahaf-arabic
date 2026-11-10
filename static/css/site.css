@@ -420,3 +420,6 @@ details.add[open] summary { margin-bottom: 10px; }
   .side-nav a { flex: none; min-height: 40px; padding: 8px 14px; border-radius: 999px; font-size: 14px; }
   .side-nav a svg { display: none; }
 }
+
+/* Q&A: stop the search bar growing tall inside a flex column */
+.stack > .search { flex: none; }
