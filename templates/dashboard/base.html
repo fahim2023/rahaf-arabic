@@ -11,7 +11,7 @@
     <a href="{% url 'dashboard:questions' %}"{% if nav == "questions" %} aria-current="page"{% endif %}>{% icon "chat" 22 %}Questions{% if new_count %}<span class="badge">{{ new_count }}</span>{% endif %}</a>
     <a href="{% url 'dashboard:bookings' %}"{% if nav == "bookings" %} aria-current="page"{% endif %}>{% icon "calendar" 22 %}Bookings{% if new_bookings %}<span class="badge">{{ new_bookings }}</span>{% endif %}</a>
     <a href="{% url 'dashboard:students' %}"{% if nav == "students" %} aria-current="page"{% endif %}>{% icon "users" 22 %}Students</a>
-    <a href="{% url 'admin:index' %}">{% icon "settings" 22 %}Site</a>
+    <a href="{% url 'admin:index' %}">{% icon "settings" 22 %}Settings</a>
   </nav>
 </div>
 {% endblock %}

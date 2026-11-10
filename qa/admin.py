@@ -22,7 +22,7 @@ class QuestionAdmin(admin.ModelAdmin):
         ("The question", {"fields": ["question", "detail", "topic", "student", "asker_label", "created_at"]}),
         ("Your answer", {
             "fields": ["status", "answer", "is_public", "answered_at", "dashboard_link"],
-            "description": "Tip: answering from the phone dashboard also emails the student for you.",
+            "description": "Tip: answering from the Teaching dashboard also emails the student for you.",
         }),
         ("Arabic version (optional)", {
             "fields": [("question_ar", "answer_ar")],
@@ -45,11 +45,11 @@ class QuestionAdmin(admin.ModelAdmin):
     def public_label(self, obj):
         return yes_no(obj.is_public, "Public", "Private")
 
-    @admin.display(description="Answer on phone")
+    @admin.display(description="Teaching dashboard")
     def dashboard_link(self, obj):
         if not obj.pk:
             return "—"
-        return format_html('<a href="{}">Open in dashboard →</a>', reverse("dashboard:answer", args=[obj.pk]))
+        return format_html('<a href="{}">Answer in the Teaching dashboard →</a>', reverse("dashboard:answer", args=[obj.pk]))
 
     @admin.action(description="Show on the public Q&A page")
     def make_public(self, request, queryset):

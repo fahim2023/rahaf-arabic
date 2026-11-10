@@ -26,14 +26,19 @@
 </a>
 {% endblock %}
 
-{% block userlinks %}
-  <a href="{% url 'dashboard:questions' %}">Phone dashboard</a>
+{% block usertools %}
+{% if has_permission %}
+<div id="user-tools">
+  <span class="rm-welcome">Welcome, <strong>{% firstof user.first_name user.get_username %}</strong></span>
+  <a href="{% url 'dashboard:questions' %}">Teaching dashboard</a>
   <a href="{% url 'core:home' %}" target="_blank" rel="noopener">View site ↗</a>
   {% if user.has_usable_password %}<a href="{% url 'admin:password_change' %}">Change password</a>{% endif %}
   <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
     {% csrf_token %}
     <button type="submit">Log out</button>
   </form>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

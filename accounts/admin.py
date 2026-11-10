@@ -129,9 +129,9 @@ class StudentUserAdmin(UserAdmin):
         profile = getattr(obj, "profile", None)
         return (profile.course_label if profile else "") or "—"
 
-    @admin.display(description="Phone dashboard")
+    @admin.display(description="Teaching dashboard")
     def dashboard_link(self, obj):
         if not obj.pk or obj.is_staff:
             return "—"
-        return format_html('<a href="{}">Open student in dashboard →</a>',
+        return format_html('<a href="{}">Open student in the Teaching dashboard →</a>',
                            reverse("dashboard:student", args=[obj.pk]))

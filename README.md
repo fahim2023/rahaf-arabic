@@ -15,7 +15,7 @@ Built with Django 5.2, PostgreSQL and plain CSS. There is no front-end framework
 | Privacy policy (UK/EU template, both languages) | `/en/privacy/` | Everyone |
 | Log in, email login link, password reset, sign-up with invite code | `/en/accounts/…` | Students & parents |
 | Student portal: next lesson in the student's own time zone, plan, homework, files, questions | `/en/portal/` | Students |
-| Teacher dashboard: answer questions, trial requests, students, invite codes, lessons, homework, files | `/en/dashboard/` | Rahaf (staff only) |
+| Teaching dashboard: answer questions, trial requests, students, invite codes, lessons, homework, files | `/en/dashboard/` | Rahaf (staff only) |
 | Django admin: courses, FAQs, resources, testimonials, site settings | `/admin/` | Rahaf / you |
 
 Every public page and the student portal work in Arabic with a right-to-left layout. The dashboard is English only.

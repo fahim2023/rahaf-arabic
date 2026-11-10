@@ -89,6 +89,7 @@ textarea[name$="_ar"], input[name$="_ar"] { direction: rtl; font-size: 17px; }
 
 /* ---------- Header ---------- */
 #header {
+  flex-shrink: 0; /* #container is a flex column; don't let the header squash on small screens */
   background: var(--rm-teal); color: var(--rm-cream); padding: 12px 32px; min-height: 64px;
   border-bottom: 3px solid var(--rm-gold-light);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 6 L38 26 L58 32 L38 38 L32 58 L26 38 L6 32 L26 26 Z' fill='none' stroke='%23E2C98F' stroke-opacity='.12' stroke-width='1'/%3E%3C/svg%3E");
@@ -103,10 +104,24 @@ textarea[name$="_ar"], input[name$="_ar"] { direction: rtl; font-size: 17px; }
 .rm-brand-name { font-weight: 800; font-size: 18px; color: #fff; letter-spacing: -0.01em; }
 .rm-brand-sub { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--rm-gold-light); margin-top: 3px; }
 
-#user-tools { font-size: 14px; letter-spacing: 0; text-transform: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
-#user-tools a, #logout-form button { color: var(--rm-cream); border-bottom: 0; font-weight: 600; text-decoration: none; }
-#user-tools a:hover, #logout-form button:hover { color: #fff; text-decoration: underline; }
-#logout-form button { font-size: 14px; }
+#user-tools {
+  float: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end;
+  gap: 6px 20px; font-size: 14px; font-weight: 500; line-height: 1.4; letter-spacing: 0; text-transform: none;
+  color: var(--rm-cream); text-align: end;
+}
+.rm-welcome { color: var(--rm-cream); line-height: 1.4; }
+.rm-welcome strong { color: #fff; font-weight: 700; }
+#logout-form { display: flex; margin: 0; }
+/* Links and the Log out button look the same (Django makes the button uppercase by default) */
+#header #user-tools a:link, #header #user-tools a:visited, #header #logout-form button {
+  font-family: var(--font-family-primary); font-size: 14px; font-weight: 600; line-height: 1.4;
+  letter-spacing: 0; text-transform: none; color: var(--rm-cream);
+  background: none; border: 0; padding: 0; margin: 0; cursor: pointer; text-decoration: none;
+}
+#header #user-tools a:hover, #header #user-tools a:focus-visible,
+#header #logout-form button:hover, #header #logout-form button:focus-visible {
+  color: #fff; text-decoration: underline; text-underline-offset: 3px; border: 0; margin: 0;
+}
 
 /* ---------- Breadcrumbs ---------- */
 div.breadcrumbs { background: var(--rm-sand-2); color: var(--rm-muted); border-bottom: 1px solid var(--rm-line); padding: 12px 32px; font-size: 14px; }
@@ -148,19 +163,6 @@ a.addlink, a.changelink, a.viewlink { font-weight: 600; font-size: 13px; }
 .rm-hello p { color: var(--rm-muted); font-size: 15px; margin: 0; }
 .rm-quiet { color: var(--rm-muted); }
 
-.rm-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 22px; }
-.rm-stat {
-  display: flex; flex-direction: column; gap: 2px; text-decoration: none !important;
-  background: var(--rm-paper); border: 1px solid var(--rm-line-2); border-radius: var(--rm-radius);
-  padding: 16px 18px; box-shadow: var(--rm-shadow); transition: border-color .15s, transform .15s;
-}
-.rm-stat:hover { border-color: var(--rm-teal); transform: translateY(-1px); }
-.rm-stat b { font-size: 30px; font-weight: 800; color: var(--rm-teal); line-height: 1.1; }
-.rm-stat span { font-size: 14px; color: var(--rm-muted); }
-.rm-stat.is-hot { background: var(--rm-teal); border-color: var(--rm-teal); }
-.rm-stat.is-hot b { color: #fff; }
-.rm-stat.is-hot span { color: var(--rm-cream); }
-
 .rm-quick { margin-bottom: 22px; }
 .rm-quick h2 { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--rm-gold-text); margin: 0 0 10px; background: none; padding: 0; }
 .rm-quick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
@@ -169,7 +171,9 @@ a.addlink, a.changelink, a.viewlink { font-weight: 600; font-size: 13px; }
   color: var(--rm-teal); background: var(--rm-paper); border: 1.5px solid var(--rm-teal);
 }
 .rm-quick-grid a:hover { background: var(--rm-teal-soft); color: var(--rm-teal-dark); }
-.rm-upcoming th a { font-weight: 700; }
+.rm-quick-note { color: var(--rm-muted); font-size: 14px; margin: -4px 0 10px; }
+.rm-quick-grid.rm-quick-alt a { border-style: dashed; }
+.rm-hello p a { font-weight: 700; }
 
 /* ---------- Buttons ---------- */
 .button, input[type=submit], input[type=button], .submit-row input, a.button, button.button {
@@ -332,7 +336,8 @@ body.login .submit-row input { width: 100%; padding: 13px; font-size: 15px; }
 .calendarnav-previous, .calendarnav-next { filter: hue-rotate(140deg); }
 
 @media (max-width: 767px) {
-  #header { padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 8px; }
+  #header { padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 10px; }
+  #header #user-tools { justify-content: flex-start; gap: 6px 16px; text-align: start; }
   div.breadcrumbs { padding: 10px 16px; }
   #content { padding: 18px 16px; }
   .rm-hello h1 { font-size: 24px !important; }

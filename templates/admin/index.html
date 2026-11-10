@@ -5,55 +5,32 @@
 <div class="rm-hello">
   <span class="rm-hello-ar" lang="ar">أهلاً وسهلاً</span>
   <h1>Welcome back{% if user.first_name %}, {{ user.first_name }}{% endif %}</h1>
-  <p>Here's what needs your attention today.</p>
+  <p>Edit your website: courses, prices, resources, FAQs and your details. For questions, bookings and students, use the <a href="{% url 'dashboard:questions' %}">Teaching dashboard</a>.</p>
 </div>
 {% endblock %}
 
 {% block content %}
 <div id="content-main">
-  {% if stats %}
-  <div class="rm-stats">
-    <a class="rm-stat{% if stats.questions %} is-hot{% endif %}" href="{% url 'admin:qa_question_changelist' %}?status__in=new,draft">
-      <b>{{ stats.questions }}</b><span>question{{ stats.questions|pluralize }} to answer</span>
-    </a>
-    <a class="rm-stat{% if stats.bookings %} is-hot{% endif %}" href="{% url 'admin:bookings_trialrequest_changelist' %}?status__exact=new">
-      <b>{{ stats.bookings }}</b><span>new trial request{{ stats.bookings|pluralize }}</span>
-    </a>
-    <a class="rm-stat" href="{% url 'admin:portal_lesson_changelist' %}?when=today">
-      <b>{{ stats.lessons_today }}</b><span>lesson{{ stats.lessons_today|pluralize }} today</span>
-    </a>
-    <a class="rm-stat" href="{% url 'admin:portal_homework_changelist' %}?done__exact=0">
-      <b>{{ stats.homework }}</b><span>homework not done</span>
-    </a>
-  </div>
-
   <div class="rm-quick">
-    <h2>Quick actions</h2>
+    <h2>Your website</h2>
     <div class="rm-quick-grid">
-      <a href="{% url 'admin:portal_lesson_add' %}">＋ Schedule a lesson</a>
-      <a href="{% url 'admin:portal_homework_add' %}">＋ Set homework</a>
-      <a href="{% url 'admin:portal_sharedfile_add' %}">＋ Share a file</a>
-      <a href="{% url 'admin:accounts_invitecode_add' %}">＋ New invite code</a>
+      <a href="{% url 'admin:core_sitesettings_changelist' %}">✎ Edit your details</a>
+      <a href="{% url 'admin:core_course_changelist' %}">✎ Courses &amp; prices</a>
       <a href="{% url 'admin:core_resource_add' %}">＋ Add a free resource</a>
-      <a href="{% url 'admin:core_sitesettings_changelist' %}">✎ Edit site details</a>
+      <a href="{% url 'admin:core_faq_add' %}">＋ Add an FAQ</a>
     </div>
   </div>
 
-  {% if upcoming_lessons %}
-  <div class="module rm-upcoming">
-    <h2>Next lessons</h2>
-    <table>
-      {% for lesson in upcoming_lessons %}
-      <tr>
-        <th scope="row"><a href="{% url 'admin:portal_lesson_change' lesson.pk %}">{{ lesson.starts_at|date:"D j M · H:i" }}</a></th>
-        <td>{{ lesson.student.get_full_name|default:lesson.student.email }}</td>
-        <td class="rm-quiet">{{ lesson.topic|default:"" }}</td>
-      </tr>
-      {% endfor %}
-    </table>
+  <div class="rm-quick">
+    <h2>In the Teaching dashboard</h2>
+    <p class="rm-quick-note">Lessons, homework and files are added from each student's page.</p>
+    <div class="rm-quick-grid rm-quick-alt">
+      <a href="{% url 'dashboard:students' %}#invite">＋ New invite code</a>
+      <a href="{% url 'dashboard:students' %}">＋ Schedule a lesson</a>
+      <a href="{% url 'dashboard:students' %}">＋ Set homework</a>
+      <a href="{% url 'dashboard:students' %}">＋ Share a file</a>
+    </div>
   </div>
-  {% endif %}
-  {% endif %}
 
   {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
 </div>
