@@ -75,7 +75,7 @@ AR = {
     "Please write your question before sending.": "يرجى كتابة سؤالك قبل الإرسال.",
 
     # Login / signup / reset
-    "Rahaf Malasy": "رهف ملاسي",
+    "Rahaf Malasy": "رهف ملسي",
     "Log in": "تسجيل الدخول",
     "Your lessons, homework and answers to your questions are waiting for you.": "دروسك وواجباتك وإجابات أسئلتك بانتظارك.",
     "For students and parents with an account.": "للطلاب والأهل الذين لديهم حساب.",
@@ -125,7 +125,7 @@ AR = {
     # Base / booking
     "Learn Arabic with Rahaf": "تعلّم العربية مع رهف",
     "Patient, personal one-to-one Arabic lessons online with Rahaf Malasy, a native Syrian teacher. Modern Standard, Levantine and Quranic Arabic for adults and children.":
-        "دروس عربية فردية أونلاين بصبر واهتمام مع رهف ملاسي، معلّمة سورية. الفصحى واللهجة الشامية والعربية القرآنية للكبار والأطفال.",
+        "دروس عربية فردية أونلاين بصبر واهتمام مع رهف ملسي، معلّمة سورية. الفصحى واللهجة الشامية والعربية القرآنية للكبار والأطفال.",
     "Skip to content": "تخطَّ إلى المحتوى",
     "I'll only use your details to arrange lessons.": "سأستخدم بياناتك فقط لترتيب الدروس.",
     "See the privacy policy.": "اطّلع على سياسة الخصوصية.",
@@ -157,7 +157,7 @@ AR = {
     "Native Syrian speaker": "متحدثة أصلية من سوريا",
     "Adults & children": "للكبار والأطفال",
     "Teacher photo coming soon": "صورة المعلّمة قريبًا",
-    "Rahaf Malasy, Arabic teacher": "رهف ملاسي، معلّمة لغة عربية",
+    "Rahaf Malasy, Arabic teacher": "رهف ملسي، معلّمة لغة عربية",
     "Teacher photo": "صورة المعلّمة",
     "Meet Rahaf": "تعرّف على رهف",
     "Meet Rahaf · intro video coming soon": "تعرّف على رهف · فيديو تعريفي قريبًا",
@@ -233,7 +233,7 @@ AR = {
     "Unsubscribe any time.": "يمكنك إلغاء الاشتراك في أي وقت.",
 
     # Header / footer
-    "Rahaf Malasy · Online Arabic lessons": "رهف ملاسي · دروس عربية أونلاين",
+    "Rahaf Malasy · Online Arabic lessons": "رهف ملسي · دروس عربية أونلاين",
     "Language": "اللغة",
     "Main": "القائمة الرئيسية",
     "Arabic Teacher": "معلّمة لغة عربية",

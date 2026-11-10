@@ -78,7 +78,7 @@ Most of these are in **/admin → Site settings**:
 - [ ] Upload the six **resource** PDFs. Until then they show "Coming soon".
 - [ ] Add **testimonials** from real students. The section stays hidden until at least one is added.
 - [ ] Fill in the brackets in `templates/core/privacy.html`, remove the yellow template box, and get the policy checked before launch.
-- [ ] Have Rahaf read the Arabic text, including her surname spelling ملاسي (`locale/translate_ar.py` and the course/FAQ content in admin).
+- [ ] Have Rahaf read the Arabic text (her surname is spelled ملسي) (`locale/translate_ar.py` and the course/FAQ content in admin).
 
 ## Editing translations
 

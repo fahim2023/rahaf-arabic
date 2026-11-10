@@ -265,7 +265,7 @@ msgstr "يرجى كتابة سؤالك قبل الإرسال."
 #: templates/partials/footer.html:7 templates/partials/header.html:6
 #: templates/portal/home.html:7 templates/qa/list.html:3
 msgid "Rahaf Malasy"
-msgstr "رهف ملاسي"
+msgstr "رهف ملسي"
 
 #: templates/accounts/login.html:3 templates/accounts/login.html:11
 #: templates/accounts/login.html:25
@@ -470,7 +470,7 @@ msgid ""
 "native Syrian teacher. Modern Standard, Levantine and Quranic Arabic for "
 "adults and children."
 msgstr ""
-"دروس عربية فردية أونلاين بصبر واهتمام مع رهف ملاسي، معلّمة سورية. الفصحى "
+"دروس عربية فردية أونلاين بصبر واهتمام مع رهف ملسي، معلّمة سورية. الفصحى "
 "واللهجة الشامية والعربية القرآنية للكبار والأطفال."
 
 #: templates/base.html:19
@@ -595,7 +595,7 @@ msgstr "صورة المعلّمة قريبًا"
 
 #: templates/core/home.html:27
 msgid "Rahaf Malasy, Arabic teacher"
-msgstr "رهف ملاسي، معلّمة لغة عربية"
+msgstr "رهف ملسي، معلّمة لغة عربية"
 
 #: templates/core/home.html:30
 msgid "Teacher photo"
@@ -889,7 +889,7 @@ msgstr "يمكنك إلغاء الاشتراك في أي وقت."
 
 #: templates/partials/footer.html:19
 msgid "Rahaf Malasy · Online Arabic lessons"
-msgstr "رهف ملاسي · دروس عربية أونلاين"
+msgstr "رهف ملسي · دروس عربية أونلاين"
 
 #: templates/partials/footer.html:20
 msgid "Language"
