@@ -29,3 +29,10 @@ def logo_mark(size=44, inverse=False):
 @register.inclusion_tag("partials/icon.html")
 def icon(name, size=20, stroke=2):
     return {"name": name, "size": size, "stroke": stroke}
+
+
+@register.simple_tag(takes_context=True)
+def home_jsonld(context):
+    """schema.org data for the homepage (EducationalOrganization + courses)."""
+    from core.jsonld import home_jsonld_script
+    return home_jsonld_script(context.get("site"), context.get("courses") or [])

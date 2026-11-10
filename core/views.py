@@ -52,3 +52,16 @@ def subscribe(request):
     else:
         messages.error(request, _("Please enter a valid email address."))
     return redirect("core:resources")
+
+
+ROBOTS_DISALLOW = ["/admin/", "/en/dashboard/", "/ar/dashboard/", "/en/portal/", "/ar/portal/"]
+
+
+def robots_txt(request):
+    from django.conf import settings
+    from django.http import HttpResponse
+
+    lines = ["User-agent: *", "Allow: /"]
+    lines += [f"Disallow: {path}" for path in ROBOTS_DISALLOW]
+    lines += ["", f"Sitemap: {settings.SITE_URL}/sitemap.xml", ""]
+    return HttpResponse("\n".join(lines), content_type="text/plain; charset=utf-8")

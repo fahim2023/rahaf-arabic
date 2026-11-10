@@ -3,11 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{% trans "Learn Arabic with Rahaf" %}{% endblock %}</title>
-<meta name="description" content="{% block description %}{% trans "Patient, personal one-to-one Arabic lessons online with Rahaf Malasy, a native Syrian teacher. Modern Standard, Levantine and Quranic Arabic for adults and children." %}{% endblock %}">
+<title>{% block title %}{{ meta.title }}{% endblock %}</title>
+<meta name="description" content="{{ meta.description }}">
+<meta name="robots" content="{% block robots %}{{ meta.robots }}{% endblock %}">
+<link rel="canonical" href="{{ meta.canonical }}">
+<link rel="alternate" hreflang="en" href="{{ meta.url_en }}">
+<link rel="alternate" hreflang="ar" href="{{ meta.url_ar }}">
+<link rel="alternate" hreflang="x-default" href="{{ meta.url_en }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ meta.site_name }}">
+<meta property="og:title" content="{{ meta.title }}">
+<meta property="og:description" content="{{ meta.description }}">
+<meta property="og:url" content="{{ meta.canonical }}">
+<meta property="og:image" content="{{ meta.image }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ meta.image_alt }}">
+<meta property="og:locale" content="{{ meta.locale }}">
+<meta property="og:locale:alternate" content="{{ meta.locale_alternate }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta.title }}">
+<meta name="twitter:description" content="{{ meta.description }}">
+<meta name="twitter:image" content="{{ meta.image }}">
 <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
-<link rel="alternate" hreflang="en" href="{{ request.scheme }}://{{ request.get_host }}{{ url_en }}">
-<link rel="alternate" hreflang="ar" href="{{ request.scheme }}://{{ request.get_host }}{{ url_ar }}">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">

@@ -295,6 +295,24 @@ AR = {
     "Send question": "أرسل السؤال",
     "Answered": "تمت الإجابة",
     "Waiting": "بانتظار الإجابة",
+    # Search results and link previews (core/seo.py)
+    "Rahaf Malasy · Arabic lessons": "رهف ملسي · دروس عربية",
+    "Online Arabic lessons with a native Syrian teacher · Rahaf Malasy":
+        "دروس عربية أونلاين مع معلّمة سورية · رهف ملسي",
+    "Online Arabic lessons with Rahaf, a native Syrian teacher. Modern Standard, Levantine and Quranic Arabic for adults and kids. Book a free trial.":
+        "دروس عربية أونلاين مع رهف، معلّمة سورية. الفصحى واللهجة الشامية والعربية القرآنية للكبار والأطفال. احجز درسًا تجريبيًا مجانيًا.",
+    "Free Arabic worksheets and resources · Rahaf Malasy": "أوراق عمل وموارد عربية مجانية · رهف ملسي",
+    "Free Arabic worksheets from a native Syrian teacher: the alphabet, Levantine phrases, Modern Standard and Quranic Arabic, and sheets for kids.":
+        "أوراق عمل عربية مجانية من معلّمة سورية: الحروف، عبارات باللهجة الشامية، الفصحى والعربية القرآنية، وأوراق للأطفال.",
+    "Arabic questions answered · Student Q&A · Rahaf Malasy": "إجابات عن أسئلة العربية · أسئلة الطلاب · رهف ملسي",
+    "Arabic learners' questions answered by Rahaf, a native Syrian teacher: grammar, Levantine dialect, Modern Standard and Quranic Arabic.":
+        "أسئلة متعلّمي العربية تجيب عنها رهف، معلّمة سورية: القواعد واللهجة الشامية والفصحى والعربية القرآنية.",
+    "Book a free online Arabic trial lesson · Rahaf Malasy": "احجز درسًا تجريبيًا مجانيًا أونلاين · رهف ملسي",
+    "Book a free online Arabic trial lesson with Rahaf, a native Syrian teacher. Modern Standard, Levantine or Quranic Arabic, for adults and kids.":
+        "احجز درسًا تجريبيًا مجانيًا أونلاين مع رهف، معلّمة سورية. الفصحى أو اللهجة الشامية أو العربية القرآنية، للكبار والأطفال.",
+    "Privacy policy · Rahaf Malasy": "سياسة الخصوصية · رهف ملسي",
+    "How Rahaf Malasy's online Arabic lessons site collects, uses and protects your personal details, and how to have them changed or deleted.":
+        "كيف يجمع موقع دروس رهف ملسي للعربية بياناتك الشخصية ويستخدمها ويحميها، وكيف تطلب تعديلها أو حذفها.",
 }
 
 PLURALS = {

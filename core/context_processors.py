@@ -2,6 +2,7 @@ from django.urls import translate_url
 from django.utils.translation import get_language
 
 from .models import SiteSettings
+from .seo import build_meta
 
 
 def site(request):
@@ -13,4 +14,5 @@ def site(request):
         "lang": lang,
         "url_en": translate_url(path, "en"),
         "url_ar": translate_url(path, "ar"),
+        "meta": build_meta(request),
     }

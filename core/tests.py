@@ -267,3 +267,93 @@ class DashboardTests(TestCase):
         self.client.post(url("dashboard:update_booking", "en", t.pk), {"status": "booked", "notes": "Fri 6pm"})
         t.refresh_from_db()
         self.assertEqual(t.status, "booked")
+
+
+@override_settings(**TEST_SETTINGS, SITE_URL="https://rahaf.example")
+class SeoTests(TestCase):
+    PUBLIC = ("core:home", "core:resources", "qa:list", "bookings:book", "core:privacy")
+
+    @classmethod
+    def setUpTestData(cls):
+        call_command("seed_content", verbosity=0)
+
+    def head(self, path, **params):
+        html = self.client.get(path, params).content.decode()
+        return html[: html.index("</head>")]
+
+    def robots(self, head):
+        import re
+        return re.search(r'<meta name="robots" content="([^"]+)"', head).group(1)
+
+    def test_public_pages_have_full_meta_in_both_languages(self):
+        for lang in ("en", "ar"):
+            for name in self.PUBLIC:
+                with self.subTest(lang=lang, page=name):
+                    path = url(name, lang)
+                    head = self.head(path)
+                    self.assertIn('<meta name="description" content="', head)
+                    self.assertIn(f'<link rel="canonical" href="https://rahaf.example{path}">', head)
+                    for hreflang in ("en", "ar", "x-default"):
+                        self.assertIn(f'hreflang="{hreflang}" href="https://rahaf.example/', head)
+                    self.assertIn('property="og:title"', head)
+                    self.assertIn('property="og:image" content="https://rahaf.example/static/img/og-image', head)
+                    self.assertIn('<meta name="twitter:card" content="summary_large_image">', head)
+                    self.assertEqual(self.robots(head), "index, follow")
+
+    def test_canonical_drops_query_string(self):
+        head = self.head(url("core:resources"), cat="kids")
+        self.assertIn('<link rel="canonical" href="https://rahaf.example/en/resources/">', head)
+
+    def test_arabic_pages_use_arabic_title_and_image(self):
+        for name in self.PUBLIC:
+            with self.subTest(page=name):
+                head = self.head(url(name, "ar"))
+                title = head[head.index("<title>") + 7: head.index("</title>")]
+                self.assertRegex(title, "[؀-ۿ]")
+                self.assertIn("og-image-ar.png", head)
+                self.assertIn('content="ar_SY"', head)
+
+    def test_private_pages_are_noindex(self):
+        student = make_student()
+        self.assertEqual(self.robots(self.head(url("accounts:login"))), "noindex, follow")
+        self.assertEqual(self.robots(self.head(url("bookings:thanks"))), "noindex, follow")
+        self.assertEqual(self.robots(self.head(url("qa:list"), q="letters")), "noindex, follow")
+        self.client.force_login(student)
+        self.assertEqual(self.robots(self.head(url("portal:home"))), "noindex, follow")
+
+    def test_dashboard_is_noindex_nofollow(self):
+        teacher = User.objects.create_user("t@example.com", "t@example.com", "a-good-pass-123", is_staff=True)
+        self.client.force_login(teacher)
+        self.assertEqual(self.robots(self.head(url("dashboard:questions"))), "noindex, nofollow")
+
+    def test_homepage_json_ld_is_valid(self):
+        import json
+        import re
+        for lang in ("en", "ar"):
+            html = self.client.get(url("core:home", lang)).content.decode()
+            raw = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1)
+            data = json.loads(raw)
+            self.assertEqual(data["@type"], "EducationalOrganization")
+            self.assertEqual(data["founder"]["name"], "Rahaf Malasy")
+            courses = data["hasOfferCatalog"]["itemListElement"]
+            self.assertTrue(courses)
+            self.assertEqual(courses[0]["hasCourseInstance"]["courseMode"], "Online")
+        self.assertNotIn("application/ld+json", self.client.get(url("qa:list")).content.decode())
+
+    def test_robots_txt(self):
+        r = self.client.get("/robots.txt")
+        self.assertEqual(r.status_code, 200)
+        body = r.content.decode()
+        self.assertIn("Disallow: /admin/", body)
+        self.assertIn("Disallow: /ar/portal/", body)
+        self.assertIn("Sitemap: https://rahaf.example/sitemap.xml", body)
+
+    def test_sitemap(self):
+        r = self.client.get("/sitemap.xml")
+        self.assertEqual(r.status_code, 200)
+        body = r.content.decode()
+        for path in ("/en/", "/ar/", "/en/qa/", "/ar/resources/", "/en/book/", "/ar/privacy/"):
+            self.assertIn(f"<loc>https://rahaf.example{path}</loc>", body)
+        self.assertIn('hreflang="ar"', body)
+        self.assertNotIn("portal", body)
+        self.assertNotIn("dashboard", body)

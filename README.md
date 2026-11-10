@@ -65,6 +65,14 @@ python manage.py test core
 - **Email:** with Gmail, use an [app password](https://support.google.com/accounts/answer/185833). Any SMTP provider works, such as Brevo or Mailgun.
 - **Uploads:** Render and Heroku wipe their disks on every deploy, so lesson files, resource PDFs and the teacher photo need `CLOUDINARY_URL` set. Without it, uploads disappear.
 
+## Search engines and link previews
+
+Every page has a title, a description and link-preview tags (Open Graph and Twitter), plus `hreflang` links that join each English page to its Arabic version. Titles and descriptions are in `core/seo.py`, with the Arabic in `locale/translate_ar.py`. The homepage also carries structured data (`core/jsonld.py`) describing Rahaf and her courses. Log-in, portal, dashboard, thank-you and search-result pages are marked `noindex`.
+
+1. **Set `SITE_URL` to the real domain**, e.g. `https://www.example.com` with no trailing slash. Canonical links, preview images, `robots.txt` and the sitemap are all built from it. If it's left as `localhost`, Google sees the wrong addresses.
+2. **Submit the sitemap in [Google Search Console](https://search.google.com/search-console).** Add the domain as a property, verify it, then go to *Sitemaps* and enter `sitemap.xml`. You can check both files at `/robots.txt` and `/sitemap.xml`.
+3. **Check the link previews.** Paste a page link into a WhatsApp chat (to yourself) or into the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/). English links show `static/img/og-image.png`, Arabic links `og-image-ar.png`. WhatsApp and Facebook cache previews, so after changing an image use the debugger's *Scrape Again* button.
+
 ## Before launch: things Rahaf needs to fill in
 
 Most of these are in **/admin → Site settings**:
